@@ -1,0 +1,28 @@
+# seed: 100
+# last_layer: 'backbone.aggregate'
+# num_samples: 100
+# num_runs: 10
+# batch_size: 32
+# model_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/jump_featurization/models/foundation_vit/'
+# controls_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/controls/jump/source3/'
+# linear_probe_data_dir: '/nvme_scratch1/cjh86475/translational_imaging/channel_agnostic_model/jump/model_evaluation/'
+# num_epochs: 100
+# log_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/foundation_vit/lightning_logs/'
+# metrics_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/foundation_vit/'
+# patience: 25
+# model_name: foundation_vit
+
+
+seed: 100
+last_layer: 'backbone.aggregate'
+num_samples: 100
+num_runs: 10
+batch_size: 32
+model_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/jump_featurization/models/resnet18_imagenet/'
+controls_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/controls/jump/source3/'
+linear_probe_data_dir: '/nvme_scratch1/cjh86475/translational_imaging/channel_agnostic_model/jump/model_evaluation/'
+num_epochs: 100
+log_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/resnet18_imagenet/lightning_logs/'
+metrics_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/resnet18_imagenet/'
+patience: 25
+model_name: resnet18_imagenet
