@@ -34,6 +34,12 @@ export ORACLE_PASSWORD="metr0p0lis"
 # python linear_probing.py -c config.yaml
 
 
-# python get_aggregate_linear_probe_data.py -c config.yaml
+# python get_aggregate_data.py -c config.yaml
 
-python evaluate_aggregate_embeddings.py -c config.yaml
+# python evaluate_aggregate_embeddings.py -c config.yaml
+
+
+# python run_eval_pipeline.py 
+
+
+python run_linear_pipeline.py 
