@@ -1,7 +1,0 @@
-Loading module miniconda version 23.1.0-1
-Traceback (most recent call last):
-  File "get_aggregate_data.py", line 134, in <module>
-    main(config)
-  File "get_aggregate_data.py", line 112, in main
-    new_probing_df= get_aggregate_data(features,controls,control_ids,num_samples,last_layer,seed)
-TypeError: get_aggregate_data() takes 4 positional arguments but 6 were given
