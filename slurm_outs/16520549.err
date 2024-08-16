@@ -1,0 +1,122 @@
+Loading module miniconda version 23.1.0-1
+get_aggregate_data.py:64: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  feature_df ["TARGET"] = feature_df["compound"].map(label_mapper)
+get_aggregate_data.py:64: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  feature_df ["TARGET"] = feature_df["compound"].map(label_mapper)
+get_aggregate_data.py:64: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  feature_df ["TARGET"] = feature_df["compound"].map(label_mapper)
+get_aggregate_data.py:64: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  feature_df ["TARGET"] = feature_df["compound"].map(label_mapper)
+get_aggregate_data.py:64: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  feature_df ["TARGET"] = feature_df["compound"].map(label_mapper)
+get_aggregate_data.py:64: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  feature_df ["TARGET"] = feature_df["compound"].map(label_mapper)
+get_aggregate_data.py:64: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  feature_df ["TARGET"] = feature_df["compound"].map(label_mapper)
+get_aggregate_data.py:64: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  feature_df ["TARGET"] = feature_df["compound"].map(label_mapper)
+get_aggregate_data.py:64: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  feature_df ["TARGET"] = feature_df["compound"].map(label_mapper)
+get_aggregate_data.py:64: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  feature_df ["TARGET"] = feature_df["compound"].map(label_mapper)
+get_aggregate_data.py:64: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  feature_df ["TARGET"] = feature_df["compound"].map(label_mapper)
+get_aggregate_data.py:64: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  feature_df ["TARGET"] = feature_df["compound"].map(label_mapper)
+get_aggregate_data.py:64: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  feature_df ["TARGET"] = feature_df["compound"].map(label_mapper)
+get_aggregate_data.py:64: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  feature_df ["TARGET"] = feature_df["compound"].map(label_mapper)
+get_aggregate_data.py:64: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  feature_df ["TARGET"] = feature_df["compound"].map(label_mapper)
+get_aggregate_data.py:64: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  feature_df ["TARGET"] = feature_df["compound"].map(label_mapper)
+get_aggregate_data.py:64: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  feature_df ["TARGET"] = feature_df["compound"].map(label_mapper)
+get_aggregate_data.py:64: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  feature_df ["TARGET"] = feature_df["compound"].map(label_mapper)
+Traceback (most recent call last):
+  File "get_aggregate_data.py", line 134, in <module>
+    main(config)
+  File "get_aggregate_data.py", line 112, in main
+    new_probing_df= get_aggregate_data(features,controls,control_ids,last_layer)
+  File "get_aggregate_data.py", line 61, in get_aggregate_data
+    target_names = np.unique(feature_df ['compound'].values)
+  File "<__array_function__ internals>", line 180, in unique
+  File "/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/numpy/lib/arraysetops.py", line 274, in unique
+    ret = _unique1d(ar, return_index, return_inverse, return_counts, 
+  File "/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/numpy/lib/arraysetops.py", line 336, in _unique1d
+    ar.sort()
+TypeError: '<' not supported between instances of 'str' and 'float'

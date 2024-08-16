@@ -1,0 +1,101 @@
+Loading module miniconda version 23.1.0-1
+GPU available: True, used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/pytorch_lightning/callbacks/model_checkpoint.py:611: UserWarning: Checkpoint directory /hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/foundation_vit/lightning_logs/_0/checkpoints exists and is not empty.
+  rank_zero_warn(f"Checkpoint directory {dirpath} exists and is not empty.")
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/pytorch_lightning/trainer/connectors/data_connector.py:240: PossibleUserWarning: The dataloader, val_dataloader 0, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 48 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+  rank_zero_warn(
+/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/pytorch_lightning/trainer/connectors/data_connector.py:240: PossibleUserWarning: The dataloader, train_dataloader, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 48 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+  rank_zero_warn(
+/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/sklearn/metrics/_classification.py:2184: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/numpy/core/fromnumeric.py:3432: RuntimeWarning: Mean of empty slice.
+  return _methods._mean(a, axis=axis, dtype=dtype,
+/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/numpy/core/_methods.py:190: RuntimeWarning: invalid value encountered in double_scalars
+  ret = ret.dtype.type(ret / rcount)
+/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/numpy/lib/function_base.py:518: RuntimeWarning: Mean of empty slice.
+  avg = a.mean(axis, **keepdims_kw)
+/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/numpy/core/_methods.py:190: RuntimeWarning: invalid value encountered in double_scalars
+  ret = ret.dtype.type(ret / rcount)
+GPU available: True, used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/pytorch_lightning/callbacks/model_checkpoint.py:611: UserWarning: Checkpoint directory /hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/foundation_vit/lightning_logs/_1/checkpoints exists and is not empty.
+  rank_zero_warn(f"Checkpoint directory {dirpath} exists and is not empty.")
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/pytorch_lightning/trainer/connectors/data_connector.py:240: PossibleUserWarning: The dataloader, val_dataloader 0, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 48 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+  rank_zero_warn(
+/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/pytorch_lightning/trainer/connectors/data_connector.py:240: PossibleUserWarning: The dataloader, train_dataloader, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 48 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+  rank_zero_warn(
+/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/sklearn/metrics/_classification.py:2184: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/numpy/core/fromnumeric.py:3432: RuntimeWarning: Mean of empty slice.
+  return _methods._mean(a, axis=axis, dtype=dtype,
+/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/numpy/core/_methods.py:190: RuntimeWarning: invalid value encountered in double_scalars
+  ret = ret.dtype.type(ret / rcount)
+/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/numpy/lib/function_base.py:518: RuntimeWarning: Mean of empty slice.
+  avg = a.mean(axis, **keepdims_kw)
+/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/numpy/core/_methods.py:190: RuntimeWarning: invalid value encountered in double_scalars
+  ret = ret.dtype.type(ret / rcount)
+GPU available: True, used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/pytorch_lightning/callbacks/model_checkpoint.py:611: UserWarning: Checkpoint directory /hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/foundation_vit/lightning_logs/_2/checkpoints exists and is not empty.
+  rank_zero_warn(f"Checkpoint directory {dirpath} exists and is not empty.")
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/pytorch_lightning/trainer/connectors/data_connector.py:240: PossibleUserWarning: The dataloader, val_dataloader 0, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 48 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+  rank_zero_warn(
+/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/pytorch_lightning/trainer/connectors/data_connector.py:240: PossibleUserWarning: The dataloader, train_dataloader, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 48 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+  rank_zero_warn(
+/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/sklearn/metrics/_classification.py:2184: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/numpy/core/fromnumeric.py:3432: RuntimeWarning: Mean of empty slice.
+  return _methods._mean(a, axis=axis, dtype=dtype,
+/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/numpy/core/_methods.py:190: RuntimeWarning: invalid value encountered in double_scalars
+  ret = ret.dtype.type(ret / rcount)
+/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/numpy/lib/function_base.py:518: RuntimeWarning: Mean of empty slice.
+  avg = a.mean(axis, **keepdims_kw)
+/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/numpy/core/_methods.py:190: RuntimeWarning: invalid value encountered in double_scalars
+  ret = ret.dtype.type(ret / rcount)
+GPU available: True, used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/pytorch_lightning/callbacks/model_checkpoint.py:611: UserWarning: Checkpoint directory /hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/foundation_vit/lightning_logs/_3/checkpoints exists and is not empty.
+  rank_zero_warn(f"Checkpoint directory {dirpath} exists and is not empty.")
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/pytorch_lightning/trainer/connectors/data_connector.py:240: PossibleUserWarning: The dataloader, val_dataloader 0, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 48 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+  rank_zero_warn(
+/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/pytorch_lightning/trainer/connectors/data_connector.py:240: PossibleUserWarning: The dataloader, train_dataloader, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 48 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+  rank_zero_warn(
+/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/sklearn/metrics/_classification.py:2184: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/numpy/core/fromnumeric.py:3432: RuntimeWarning: Mean of empty slice.
+  return _methods._mean(a, axis=axis, dtype=dtype,
+/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/numpy/core/_methods.py:190: RuntimeWarning: invalid value encountered in double_scalars
+  ret = ret.dtype.type(ret / rcount)
+/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/numpy/lib/function_base.py:518: RuntimeWarning: Mean of empty slice.
+  avg = a.mean(axis, **keepdims_kw)
+/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/numpy/core/_methods.py:190: RuntimeWarning: invalid value encountered in double_scalars
+  ret = ret.dtype.type(ret / rcount)
+Traceback (most recent call last):
+  File "linear_probing.py", line 242, in <module>
+    main(config)
+  File "linear_probing.py", line 212, in main
+    dl_train = DataLoader(ds_train, batch_size=batch_size, shuffle=True) 
+  File "/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/torch/utils/data/dataloader.py", line 270, in __init__
+    sampler = RandomSampler(dataset, generator=generator)  # type: ignore[arg-type]
+  File "/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/torch/utils/data/sampler.py", line 102, in __init__
+    raise ValueError("num_samples should be a positive integer "
+ValueError: num_samples should be a positive integer value, but got num_samples=0
+Traceback (most recent call last):
+  File "run_eval_pipeline.py", line 10, in <module>
+    subprocess.check_call(['python', script, '-c', 'config.yaml'])
+  File "/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/subprocess.py", line 364, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command '['python', 'linear_probing.py', '-c', 'config.yaml']' returned non-zero exit status 1.

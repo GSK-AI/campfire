@@ -1,0 +1,21 @@
+Loading module miniconda version 23.1.0-1
+Traceback (most recent call last):
+  File "get_aggregate_data.py", line 137, in <module>
+    main(config)
+  File "get_aggregate_data.py", line 123, in main
+    probing_df.to_csv(save_dir+'linear_probing_'+model_name+'.csv')
+  File "/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/pandas/util/_decorators.py", line 211, in wrapper
+    return func(*args, **kwargs)
+  File "/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/pandas/core/generic.py", line 3720, in to_csv
+    return DataFrameRenderer(formatter).to_csv(
+  File "/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/pandas/util/_decorators.py", line 211, in wrapper
+    return func(*args, **kwargs)
+  File "/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/pandas/io/formats/format.py", line 1189, in to_csv
+    csv_formatter.save()
+  File "/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/pandas/io/formats/csvs.py", line 241, in save
+    with get_handle(
+  File "/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/pandas/io/common.py", line 734, in get_handle
+    check_parent_directory(str(handle))
+  File "/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/pandas/io/common.py", line 597, in check_parent_directory
+    raise OSError(rf"Cannot save file into a non-existent directory: '{parent}'")
+OSError: Cannot save file into a non-existent directory: '/nvme_scratch1/cjh86475/translational_imaging/channel_agnostic_model/jump/model_evaluation/all_compounds'

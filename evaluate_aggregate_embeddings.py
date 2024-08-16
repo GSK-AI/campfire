@@ -90,8 +90,9 @@ def main(config) -> None:
     model_name = config["model_name"]
 
     #load probing_df
-    linear_probe_data_dir = config["linear_probe_data_dir"]
-    probing_df = pd.read_csv(linear_probe_data_dir+'aggregate_data_'+str(model_name)+'.csv')
+    eval_data_dir = config["eval_data_dir"]
+    eval_data_file_name =  config["eval_data_file_name"]
+    probing_df = pd.read_csv(eval_data_dir+eval_data_file_name+'_'+str(model_name)+'.csv')
 
     #subset into train,val,test,test_out 
     train_df = probing_df.loc[probing_df['split']=='train']

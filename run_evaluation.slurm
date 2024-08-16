@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --partition=aiml
 #SBATCH --mem=64GB
-#SBATCH --job-name=train_ioc
+#SBATCH --job-name=fvit_eval
 #SBATCH --nodes=1
 #SBATCH --ntasks=2
 #SBATCH --gres=gpu:1

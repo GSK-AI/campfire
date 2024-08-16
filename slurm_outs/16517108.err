@@ -1,0 +1,7 @@
+Loading module miniconda version 23.1.0-1
+Traceback (most recent call last):
+  File "plot_pca_embeddings.py", line 77, in <module>
+    main(config)
+  File "plot_pca_embeddings.py", line 36, in main
+    cmap = plt.cm.get_cmap('rainbow', len(np.unique(y)))
+UnboundLocalError: local variable 'y' referenced before assignment

@@ -50,11 +50,15 @@ def get_aggregate_data(
     plates['compound'] = plates.apply(lambda row: row['split'].split('_JCP',1)[1] if pd.notnull(row['split']) else np.nan, axis=1)
     plates['split'] = plates.apply(lambda row: row['split'].split('_JCP',1)[0] if pd.notnull(row['split']) else np.nan, axis=1)
 
-    plates = plates.loc[plates['compound'].isin(control_ids)]
+
+    if control_ids is not None: 
+        print("None")
+        plates = plates.loc[plates['compound'].isin(control_ids)]
 
     feature_cols = feature_cols + ['compound','split']
 
     feature_df = plates[feature_cols]
+    feature_df = feature_df.dropna()
 
     target_names = np.unique(feature_df ['compound'].values)
     label_mapper = {target_names[i]: i for i in range(len(target_names))}
@@ -94,20 +98,12 @@ def main(config) -> None:
             'JCPQC033','JCPQC034','JCPQC035','JCPQC036','JCPQC037',
             'JCPQC038','JCPQC051','JCPQC052','JCPQC053','JCPQC054']
 
-    control_ids = ['2022_033924',
-    '2022_085227',
-    '2022_037716',
-    '2022_025848',
-    '2022_046054',
-    '2022_035095',
-    '2022_064022',
-    '2022_050797',
-    '2022_012818']
+    control_ids = config['control_ids']
 
     num_samples = config["num_samples"]
     last_layer = config["last_layer"]
     controls_dir = config["controls_dir"]
-    save_dir = config["linear_probe_data_dir"]
+    save_dir = config["eval_data_dir"]
     model_name = config["model_name"]
 
     probing_df = pd.DataFrame([])
@@ -115,7 +111,7 @@ def main(config) -> None:
 
         features = pd.read_csv(model_dir+feature_dirs[i]+features_string)
         controls = controls = pd.read_csv(controls_dir+plate_ids[i]+'_controls.csv',index_col=0)
-        new_probing_df= get_aggregate_data(features,controls,control_ids,num_samples,last_layer,seed)
+        new_probing_df= get_aggregate_data(features,controls,control_ids,last_layer)
 
         if i >0:
             probing_df = pd.concat([probing_df,new_probing_df])
@@ -123,7 +119,7 @@ def main(config) -> None:
         else:
             probing_df = new_probing_df
 
-    probing_df.to_csv(save_dir+'linear_probing_'+model_name+'.csv')
+    probing_df.to_csv(save_dir+'aggregate_data_'+model_name+'.csv')
 
 if __name__ == "__main__":
 

@@ -1,0 +1,4 @@
+Loading module miniconda version 23.1.0-1
+TBB Warning: The number of workers is currently limited to 1. The request for 47 workers is ignored. Further requests for more workers will be silently ignored until the limit changes.
+
+slurmstepd: error: *** JOB 16617541 ON gpu-607 CANCELLED AT 2024-07-23T13:13:33 ***

@@ -32,6 +32,8 @@ def get_probing_data(plates,controls,control_ids,num_samples,last_layer,seed):
 
     held_out_feat["TARGET"] = held_out_feat["compound"].map(label_mapper)
 
+    feature_df = feature_df.rename(columns=lambda x: 'embedding_' + x.split("_")[-1] if x.startswith(last_layer) else x)
+
     return held_out_feat 
 
 
@@ -70,7 +72,7 @@ def main(config) -> None:
     num_samples = config["num_samples"]
     last_layer = config["last_layer"]
     controls_dir = config["controls_dir"]
-    save_dir = config["linear_probe_data_dir"]
+    save_dir = config["eval_data_dir"]
     model_name = config["model_name"]
 
     probing_df = pd.DataFrame([])

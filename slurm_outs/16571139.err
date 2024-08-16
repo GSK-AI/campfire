@@ -1,0 +1,21 @@
+Loading module miniconda version 23.1.0-1
+Traceback (most recent call last):
+  File "evaluate_aggregate_embeddings.py", line 167, in <module>
+    main(config)
+  File "evaluate_aggregate_embeddings.py", line 94, in main
+    probing_df = pd.read_csv(linear_probe_data_dir+'aggregate_data_'+str(model_name)+'.csv')
+  File "/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/pandas/util/_decorators.py", line 211, in wrapper
+    return func(*args, **kwargs)
+  File "/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/pandas/util/_decorators.py", line 331, in wrapper
+    return func(*args, **kwargs)
+  File "/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/pandas/io/parsers/readers.py", line 950, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/pandas/io/parsers/readers.py", line 605, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/pandas/io/parsers/readers.py", line 1442, in __init__
+    self._engine = self._make_engine(f, self.engine)
+  File "/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/pandas/io/parsers/readers.py", line 1735, in _make_engine
+    self.handles = get_handle(
+  File "/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/site-packages/pandas/io/common.py", line 856, in get_handle
+    handle = open(
+FileNotFoundError: [Errno 2] No such file or directory: '/nvme_scratch1/cjh86475/translational_imaging/channel_agnostic_model/jump/model_evaluation/all_compounds/aggregate_data_resnet18_imagenet.csv'

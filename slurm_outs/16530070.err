@@ -1,0 +1,5 @@
+Loading module miniconda version 23.1.0-1
+plot_pca_embeddings.py:37: MatplotlibDeprecationWarning: The get_cmap function was deprecated in Matplotlib 3.7 and will be removed two minor releases later. Use ``matplotlib.colormaps[name]`` or ``matplotlib.colormaps.get_cmap(obj)`` instead.
+  cmap = plt.cm.get_cmap('viridis', len(np.unique(y)))
+plot_pca_embeddings.py:58: MatplotlibDeprecationWarning: The legendHandles attribute was deprecated in Matplotlib 3.7 and will be removed two minor releases later. Use legend_handles instead.
+  for handle in legend1.legendHandles:

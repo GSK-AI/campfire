@@ -1,0 +1,13 @@
+Loading module miniconda version 23.1.0-1
+Traceback (most recent call last):
+  File "linear_probing.py", line 242, in <module>
+    main(config)
+  File "linear_probing.py", line 178, in main
+    list_of_train_dfs[i] = pd.concat([list_of_train_dfs[i],nrun_splits[i]])
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "run_eval_pipeline.py", line 10, in <module>
+    subprocess.check_call(['python', script, '-c', 'config.yaml'])
+  File "/nvme_scratch1/cjh86475/conda_envs/aiml_active_learning_almo_all/lib/python3.8/subprocess.py", line 364, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command '['python', 'linear_probing.py', '-c', 'config.yaml']' returned non-zero exit status 1.

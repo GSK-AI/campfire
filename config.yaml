@@ -13,16 +13,46 @@
 # model_name: foundation_vit
 
 
+# seed: 100
+# last_layer: 'backbone.aggregate'
+# num_samples: 100
+# num_runs: 10
+# batch_size: 32
+# model_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/jump_featurization/models/resnet18_imagenet/'
+# controls_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/controls/jump/source3/'
+# linear_probe_data_dir: '/nvme_scratch1/cjh86475/translational_imaging/channel_agnostic_model/jump/model_evaluation/all_compounds/'
+# num_epochs: 100
+# log_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/resnet18_imagenet/lightning_logs/'
+# metrics_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/all_compounds/resnet18_imagenet/'
+# patience: 25
+# model_name: resnet18_imagenet
+# plot_save_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/all_compounds/resnet18_imagenet/'
+
+
+
 seed: 100
-last_layer: 'backbone.aggregate'
+last_layer: 'encoder.head'
 num_samples: 100
 num_runs: 10
 batch_size: 32
-model_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/jump_featurization/models/resnet18_imagenet/'
+model_dir: /hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/mae_feats/32_tiles_all/
 controls_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/controls/jump/source3/'
-linear_probe_data_dir: '/nvme_scratch1/cjh86475/translational_imaging/channel_agnostic_model/jump/model_evaluation/'
+eval_data_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/mae/32_all/'
+eval_data_file_name: linear_probing
 num_epochs: 100
-log_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/resnet18_imagenet/lightning_logs/'
-metrics_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/resnet18_imagenet/'
+log_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/mae/lightning_logs/'
+metrics_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/mae/32_all/'
 patience: 25
-model_name: resnet18_imagenet
+model_name: mae
+plot_save_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/mae/32_all/'
+
+control_ids: 
+# control_ids: ['2022_033924',
+#     '2022_085227',
+#     '2022_037716',
+#     '2022_025848',
+#     '2022_046054',
+#     '2022_035095',
+#     '2022_064022',
+#     '2022_050797',
+#     '2022_012818']
