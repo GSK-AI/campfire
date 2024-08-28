@@ -92,12 +92,6 @@ def main(config) -> None:
 
     features_string = '/FEATURES/metadata_features_model0.csv'
 
-    plate_ids = ['JCPQC016','JCPQC017','JCPQC018','JCPQC019','JCPQC020',
-            'JCPQC021','JCPQC022','JCPQC023','JCPQC024','JCPQC025',
-            'JCPQC028','JCPQC029','JCPQC030','JCPQC031','JCPQC032',
-            'JCPQC033','JCPQC034','JCPQC035','JCPQC036','JCPQC037',
-            'JCPQC038','JCPQC051','JCPQC052','JCPQC053','JCPQC054']
-
     control_ids = config['control_ids']
 
     num_samples = config["num_samples"]
@@ -109,8 +103,12 @@ def main(config) -> None:
     probing_df = pd.DataFrame([])
     for i in range(len(feature_dirs)):
 
+        with open(model_dir + feature_dirs[i] + "/user_config.yaml", "r") as f:
+            user_config = yaml.safe_load(f)
+        plate_id = user_config["barcode"][0].split("_")[1]
+        controls = pd.read_csv(controls_dir + plate_id + "_controls.csv", index_col=0)
         features = pd.read_csv(model_dir+feature_dirs[i]+features_string)
-        controls = controls = pd.read_csv(controls_dir+plate_ids[i]+'_controls.csv',index_col=0)
+        
         new_probing_df= get_aggregate_data(features,controls,control_ids,last_layer)
 
         if i >0:
