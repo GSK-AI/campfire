@@ -78,8 +78,12 @@ def main(config) -> None:
     probing_df = pd.DataFrame([])
     for i in range(len(feature_dirs)):
 
+        with open(model_dir + feature_dirs[i] + "/user_config.yaml", "r") as f:
+            user_config = yaml.safe_load(f)
+        plate_id = user_config["barcode"][0].split("_")[1]
+        controls = pd.read_csv(controls_dir + plate_id + "_controls.csv", index_col=0)
         features = pd.read_csv(model_dir+feature_dirs[i]+features_string)
-        controls = controls = pd.read_csv(controls_dir+plate_ids[i]+'_controls.csv',index_col=0)
+
         new_probing_df= get_probing_data(features,controls,control_ids,num_samples,last_layer,seed)
 
         if i >0:
