@@ -53,12 +53,6 @@ def main(config) -> None:
 
     features_string = '/FEATURES/metadata_features_model0.csv'
 
-    plate_ids = ['JCPQC016','JCPQC017','JCPQC018','JCPQC019','JCPQC020',
-            'JCPQC021','JCPQC022','JCPQC023','JCPQC024','JCPQC025',
-            'JCPQC028','JCPQC029','JCPQC030','JCPQC031','JCPQC032',
-            'JCPQC033','JCPQC034','JCPQC035','JCPQC036','JCPQC037',
-            'JCPQC038','JCPQC051','JCPQC052','JCPQC053','JCPQC054']
-
     control_ids = ['2022_033924',
     '2022_085227',
     '2022_037716',
