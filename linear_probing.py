@@ -173,7 +173,11 @@ def main(config) -> None:
     for target_value in train_df['TARGET'].unique():
         train_df_target_rows = train_df.loc[train_df['TARGET']==target_value]
 
-        nrun_splits = np.array_split(np.random.shuffle(train_df_target_rows.values),Nruns)
+        shuffled_df = train_df_target_rows.sample(n=len(train_df_target_rows))
+
+        shuffled_df = shuffled_df.reset_index(drop=True)
+
+        nrun_splits = np.array_split(shuffled_df,Nruns)
         for i in range(Nruns):
             list_of_train_dfs[i] = pd.concat([list_of_train_dfs[i],nrun_splits[i]])
 

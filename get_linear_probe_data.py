@@ -3,7 +3,7 @@ import argparse
 import os
 import pathlib
 from typing import Dict
-
+import glob
 import numpy as np 
 import pandas as pd
 import yaml
@@ -51,7 +51,7 @@ def main(config) -> None:
     model_dir = config["model_dir"]
     feature_dirs = [name for name in os.listdir(model_dir) if os.path.isdir(os.path.join(model_dir, name))]
 
-    features_string = '/FEATURES/metadata_features_model0.csv'
+    features_string = '/FEATURES/'
 
     control_ids = ['2022_033924',
     '2022_085227',
@@ -69,14 +69,19 @@ def main(config) -> None:
     save_dir = config["eval_data_dir"]
     model_name = config["model_name"]
 
+    print("Model Name: {}".format(model_name))
+
     probing_df = pd.DataFrame([])
     for i in range(len(feature_dirs)):
+        print("Processing file: {}/{}".format(i+1,len(feature_dirs)))
 
         with open(model_dir + feature_dirs[i] + "/user_config.yaml", "r") as f:
             user_config = yaml.safe_load(f)
         plate_id = user_config["barcode"][0].split("_")[1]
         controls = pd.read_csv(controls_dir + plate_id + "_controls.csv", index_col=0)
-        features = pd.read_csv(model_dir+feature_dirs[i]+features_string)
+
+        feature_path = glob.glob(model_dir+feature_dirs[i]+features_string + "/*.csv")[0]
+        features = pd.read_csv(feature_path)
 
         new_probing_df= get_probing_data(features,controls,control_ids,num_samples,last_layer,seed)
 
@@ -86,7 +91,7 @@ def main(config) -> None:
         else:
             probing_df = new_probing_df
 
-    probing_df.to_csv(save_dir+'linear_probing_'+model_name+'.csv')
+    probing_df.to_csv(save_dir+'/linear_probing_'+model_name+'.csv')
 
 if __name__ == "__main__":
 
