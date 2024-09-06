@@ -62,7 +62,7 @@ def main(config) -> None:
     # Create an axes instance
     ax = fig.add_axes([0,0,1,1])
 
-    ax.set_xticklabels(model_names)
+    ax.set_xticklabels(model_names,fontsize=7)
 
     # Create the boxplot
     bp = ax.boxplot(test_data_to_plot)
@@ -82,7 +82,7 @@ def main(config) -> None:
     # Create an axes instance
     ax = fig.add_axes([0,0,1,1])
 
-    ax.set_xticklabels(model_names)
+    ax.set_xticklabels(model_names,fontsize=7)
 
     # Create the boxplot
     bp = ax.boxplot(test_out_data_to_plot)

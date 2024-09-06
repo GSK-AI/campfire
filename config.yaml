@@ -84,21 +84,57 @@
 # model_name: mae
 # plot_save_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/mae/'
 
+# seed: 100
+# last_layer: 'encoder.head'
+# num_samples: 100
+# num_runs: 10
+# batch_size: 32
+# model_dir: /hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/mae_feats/32_no_channel/
+# controls_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/controls/jump/source3/'
+# eval_data_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/mae_no_channel/'
+# eval_data_file_name: linear_probing
+# num_epochs: 100
+# log_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/mae_no_channel/lightning_logs/'
+# metrics_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/mae_no_channel/'
+# patience: 25
+# model_name: mae
+# plot_save_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/'
+
+
+# seed: 100
+# last_layer: 'encoder.head'
+# num_samples: 100
+# num_runs: 10
+# batch_size: 32
+# model_dir: /hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/mae_feats/32_no_batch_avg/
+# controls_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/controls/jump/source3/'
+# eval_data_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/mae_no_batch_avg/'
+# eval_data_file_name: linear_probing
+# num_epochs: 100
+# log_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/mae_no_batch_avg//lightning_logs/'
+# metrics_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/mae_no_batch_avg/'
+# patience: 25
+# model_name: mae
+# plot_save_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/'
+
+
+
 seed: 100
 last_layer: 'encoder.head'
 num_samples: 100
 num_runs: 10
 batch_size: 32
-model_dir: /hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/mae_feats/32_no_channel/
+model_dir: /hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/mae_feats/32_no_channel_embeds_both/
 controls_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/controls/jump/source3/'
-eval_data_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/mae_no_channel/'
+eval_data_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/mae_no_channel_embeds_both/'
 eval_data_file_name: linear_probing
 num_epochs: 100
-log_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/mae_no_channel/lightning_logs/'
-metrics_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/mae_no_channel/'
+log_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/mae_no_channel_embeds_both/lightning_logs/'
+metrics_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/mae_no_channel_embeds_both/'
 patience: 25
 model_name: mae
-plot_save_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/mae_no_channel/'
+plot_save_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/'
+
 
 # control_ids: 
 
@@ -112,3 +148,31 @@ control_ids: ['2022_033924',
     '2022_064022',
     '2022_050797',
     '2022_012818']
+
+
+test_metric_dirs:
+- '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/foundation_vit/test_metrics_foundation_vit.pkl'
+- '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/resnet18_imagenet2/test_metrics_resnet_imagenet.pkl'
+- '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/dino_vits8_imagenet/test_metrics_dino_vits8_imagenet.pkl'
+- '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/mae/test_metrics_mae.pkl'
+- '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/mae_no_channel/test_metrics_mae.pkl'
+- '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/mae_no_batch_avg/test_metrics_mae.pkl'
+- '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/mae_no_channel_embeds_both/test_metrics_mae.pkl'
+
+test_out_metric_dirs:
+- '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/foundation_vit/test_out_metrics_foundation_vit.pkl'
+- '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/resnet18_imagenet2/test_out_metrics_resnet_imagenet.pkl'
+- '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/dino_vits8_imagenet/test_out_metrics_dino_vits8_imagenet.pkl'
+- '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/mae/test_out_metrics_mae.pkl'
+- '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/mae_no_channel/test_out_metrics_mae.pkl'
+- '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/mae_no_batch_avg/test_out_metrics_mae.pkl'
+- '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/mae_no_channel_embeds_both/test_out_metrics_mae.pkl'
+
+model_names: 
+- 'FViT'
+- 'ImageNet'
+- 'DinoViT'
+- 'MAE'
+- 'Chn. Emb. Decdr. Only'
+- 'No Batch Avg'
+- No Chn. Emb.
