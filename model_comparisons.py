@@ -67,7 +67,7 @@ def main(config) -> None:
     # Create the boxplot
     bp = ax.boxplot(test_data_to_plot)
 
-    plt.ylabel('Accuracy (Plate: Seen || Channels: Seen)')
+    plt.ylabel('Accuracy (Plate: Seen || Channels: UnSeen)')
 
     # plt.ylim(0.25,0.5)
     # plt.axhline(1/9)
@@ -87,7 +87,7 @@ def main(config) -> None:
     # Create the boxplot
     bp = ax.boxplot(test_out_data_to_plot)
 
-    plt.ylabel('Accuracy (Plate: UnSeen || Channels: Seen)')
+    plt.ylabel('Accuracy (Plate: UnSeen || Channels: UnSeen)')
 
     # plt.ylim(0.25,0.5)
     # plt.axhline(1/9)
@@ -124,8 +124,64 @@ def main(config) -> None:
     patch1 = mpatches.Patch(color='darkorange', label='Seen Plates')
     patch2 = mpatches.Patch(color='dodgerblue', label='Held-Out Plates')
     plt.legend(handles=[patch1, patch2])
-    plt.ylabel('Accuracy (Seen Channels)')
+    plt.ylabel('Accuracy (UnSeen Channels)')
     plt.savefig(plot_save_dir+'model_comparisons.png',dpi=500, bbox_inches='tight')
+
+
+    plt.style.use('bmh')
+    # Create a figure instance
+    fig = plt.figure()
+    # Create an array for the x positions of the bars
+    x = np.arange(len(models)) * 2  # We multiply by 2 to leave space for each model's two bars
+
+    # Calculate means and standard deviations
+    metric1_means = [np.mean(model[0]) for model in models]
+    metric1_stds = [np.std(model[0]) for model in models]
+
+    metric2_means = [np.mean(model[1]) for model in models]
+    metric2_stds = [np.std(model[1]) for model in models]
+
+    # Create error bar plots
+    plt.errorbar(x, metric1_means, yerr=metric1_stds, fmt='o', label='Seen Plates')
+    plt.errorbar(x + 0.5, metric2_means, yerr=metric2_stds, fmt='o', label='Held-Out Plates')  # We add 0.5 to shift the second metric's bars to the right
+
+    # Add vertical dotted lines
+    for i in range(len(models) - 1):
+        plt.axvline(x=2*(i)+1.25, color='grey', linestyle='dotted')
+    # Set up x-axis labels and title
+    plt.xticks(x + 0.25, model_names)  # We add 0.25 to center the labels
+    # plt.xlabel('Model')
+    plt.ylabel('Accuracy (Seen Channels)')
+    plt.legend()
+    plt.savefig(plot_save_dir+'mean_model_comparisons.png',dpi=500, bbox_inches='tight')
+
+
+
+    Nmodels = len(test_data_to_plot)
+    rels = []
+    for i in range(Nmodels):
+        rels.append(np.array(abs(test_data_to_plot[i]-test_out_data_to_plot[i])))
+
+
+    plt.style.use('bmh')
+    # Create a figure instance
+    fig = plt.figure()
+
+    # Create an axes instance
+    ax = fig.add_axes([0,0,1,1])
+
+    ax.set_xticklabels(model_names,fontsize=7)
+
+    # Create the boxplot
+    bp = ax.boxplot(rels)
+
+    plt.ylabel('Accuracy (Plate: UnSeen || Channels: UnSeen)')
+
+    # plt.ylim(0.25,0.5)
+    # plt.axhline(1/9)
+    # Show the plot
+    plt.tight_layout()
+    plt.savefig(plot_save_dir+'relative_test_out_comparisons.png',dpi=500, bbox_inches='tight')
 
 
 
