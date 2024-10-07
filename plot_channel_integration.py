@@ -15,10 +15,10 @@ def main(config) -> None:
 
 
     """
-    test_metric_dirs = config["batch_generalisation_test_metric_dirs"]
-    test_out_metric_dirs = config["batch_generalisation_test_out_metric_dirs"]
-    model_names = config["batch_generalisation_model_names"]
-    plot_save_dir = config["batch_generalisation_plot_save_dir"]
+    test_metric_dirs = config["channel_integration_test_metric_dirs"]
+    test_out_metric_dirs = config["channel_integration_test_out_metric_dirs"]
+    model_names = config["channel_integration_model_names"]
+    plot_save_dir = config["channel_integration_plot_save_dir"]
 
     test_data_to_plot = []
     test_out_data_to_plot = []
