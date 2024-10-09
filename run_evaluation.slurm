@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --partition=aiml
+#SBATCH --partition=gpu
 #SBATCH --mem=64GB
 #SBATCH --job-name=fvit_eval
 #SBATCH --nodes=1
@@ -42,4 +42,13 @@ export ORACLE_PASSWORD="metr0p0lis"
 # python run_eval_pipeline.py 
 
 
-python run_linear_pipeline.py 
+
+# python run_linear_pipeline.py 
+
+# python model_comparisons.py -c config.yaml
+
+# python plot_batch_generalisation.py -c config.yaml
+
+# python plot_channel_integration.py -c config.yaml
+
+python run_held_out_linear_pipeline.py 
