@@ -151,7 +151,7 @@ def main(config) -> None:
     # Set up x-axis labels and title
     plt.xticks(x + 0.25, model_names)  # We add 0.25 to center the labels
     # plt.xlabel('Model')
-    plt.ylabel('Accuracy (Seen Channels)')
+    plt.ylabel('Accuracy')
     plt.legend()
     plt.savefig(plot_save_dir+'mean_model_comparisons.png',dpi=500, bbox_inches='tight')
 
@@ -188,115 +188,115 @@ def main(config) -> None:
     plt.savefig(plot_save_dir+'relative_model_comparisons.png',dpi=500, bbox_inches='tight')
 
 
-    iid_test_metric_dirs = config["iid_test_metric_dirs"]
-    iid_test_out_metric_dirs = config["iid_test_out_metric_dirs"]
-    ood_test_metric_dirs = config["ood_test_metric_dirs"]
-    ood_test_out_metric_dirs = config["ood_test_out_metric_dirs"]
+    # iid_test_metric_dirs = config["iid_test_metric_dirs"]
+    # iid_test_out_metric_dirs = config["iid_test_out_metric_dirs"]
+    # ood_test_metric_dirs = config["ood_test_metric_dirs"]
+    # ood_test_out_metric_dirs = config["ood_test_out_metric_dirs"]
 
 
-    iid_test_data_to_plot = []
-    iid_test_out_data_to_plot = []
-    ood_test_data_to_plot = []
-    ood_test_out_data_to_plot = []
+    # iid_test_data_to_plot = []
+    # iid_test_out_data_to_plot = []
+    # ood_test_data_to_plot = []
+    # ood_test_out_data_to_plot = []
 
-    for metric_dir in iid_test_metric_dirs:
+    # for metric_dir in iid_test_metric_dirs:
 
-        with open(metric_dir, 'rb') as handle:
-            metrics = pickle.load(handle)
+    #     with open(metric_dir, 'rb') as handle:
+    #         metrics = pickle.load(handle)
 
-        Nruns = len(metrics)
+    #     Nruns = len(metrics)
 
-        acc = np.zeros(Nruns)
+    #     acc = np.zeros(Nruns)
 
-        for i in range(Nruns):
-            acc[i] = metrics[i]["accuracy"]
+    #     for i in range(Nruns):
+    #         acc[i] = metrics[i]["accuracy"]
 
-        # Create a list of these arrays
-        iid_test_data_to_plot.append(acc)
+    #     # Create a list of these arrays
+    #     iid_test_data_to_plot.append(acc)
 
-    for metric_dir in iid_test_out_metric_dirs:
+    # for metric_dir in iid_test_out_metric_dirs:
 
-        with open(metric_dir, 'rb') as handle:
-            metrics = pickle.load(handle)
+    #     with open(metric_dir, 'rb') as handle:
+    #         metrics = pickle.load(handle)
 
-        Nruns = len(metrics)
+    #     Nruns = len(metrics)
 
-        acc = np.zeros(Nruns)
+    #     acc = np.zeros(Nruns)
 
-        for i in range(Nruns):
-            acc[i] = metrics[i]["accuracy"]
+    #     for i in range(Nruns):
+    #         acc[i] = metrics[i]["accuracy"]
 
-        # Create a list of these arrays
-        iid_test_out_data_to_plot.append(acc)
-
-
-    for metric_dir in ood_test_metric_dirs:
-
-        with open(metric_dir, 'rb') as handle:
-            metrics = pickle.load(handle)
-
-        Nruns = len(metrics)
-
-        acc = np.zeros(Nruns)
-
-        for i in range(Nruns):
-            acc[i] = metrics[i]["accuracy"]
-
-        # Create a list of these arrays
-        ood_test_data_to_plot.append(acc)
-
-    for metric_dir in ood_test_out_metric_dirs:
-
-        with open(metric_dir, 'rb') as handle:
-            metrics = pickle.load(handle)
-
-        Nruns = len(metrics)
-
-        acc = np.zeros(Nruns)
-
-        for i in range(Nruns):
-            acc[i] = metrics[i]["accuracy"]
-
-        # Create a list of these arrays
-        ood_test_out_data_to_plot.append(acc)
+    #     # Create a list of these arrays
+    #     iid_test_out_data_to_plot.append(acc)
 
 
-    Nmodels = len(test_data_to_plot)
-    iid_mean_change = np.zeros(Nmodels)
-    iid_std_change = np.zeros(Nmodels)
-    for i in range(Nmodels):
-        fractional_change = (ood_test_data_to_plot[i]-iid_test_data_to_plot[i])/iid_test_data_to_plot[i]
-        iid_mean_change[i]= np.mean(fractional_change)
-        iid_std_change[i] = np.std(fractional_change)
+    # for metric_dir in ood_test_metric_dirs:
 
-    Nmodels = len(test_data_to_plot)
-    ood_mean_change = np.zeros(Nmodels)
-    ood_std_change = np.zeros(Nmodels)
-    for i in range(Nmodels):
-        fractional_change = (ood_test_out_data_to_plot[i]-iid_test_out_data_to_plot[i])/iid_test_out_data_to_plot[i]
-        ood_mean_change[i]= np.mean(fractional_change)
-        ood_std_change[i] = np.std(fractional_change)
+    #     with open(metric_dir, 'rb') as handle:
+    #         metrics = pickle.load(handle)
+
+    #     Nruns = len(metrics)
+
+    #     acc = np.zeros(Nruns)
+
+    #     for i in range(Nruns):
+    #         acc[i] = metrics[i]["accuracy"]
+
+    #     # Create a list of these arrays
+    #     ood_test_data_to_plot.append(acc)
+
+    # for metric_dir in ood_test_out_metric_dirs:
+
+    #     with open(metric_dir, 'rb') as handle:
+    #         metrics = pickle.load(handle)
+
+    #     Nruns = len(metrics)
+
+    #     acc = np.zeros(Nruns)
+
+    #     for i in range(Nruns):
+    #         acc[i] = metrics[i]["accuracy"]
+
+    #     # Create a list of these arrays
+    #     ood_test_out_data_to_plot.append(acc)
 
 
-    plt.style.use('bmh')
-    # Create a figure instance
-    fig = plt.figure()
-    # Create an array for the x positions of the bars
-    x = np.arange(len(models)) * 2  # We multiply by 2 to leave space for each model's two bars
+    # Nmodels = len(test_data_to_plot)
+    # iid_mean_change = np.zeros(Nmodels)
+    # iid_std_change = np.zeros(Nmodels)
+    # for i in range(Nmodels):
+    #     fractional_change = (ood_test_data_to_plot[i]-iid_test_data_to_plot[i])/iid_test_data_to_plot[i]
+    #     iid_mean_change[i]= np.mean(fractional_change)
+    #     iid_std_change[i] = np.std(fractional_change)
 
-    # Create error bar plots
-    plt.errorbar(x, iid_mean_change, yerr=iid_std_change, fmt='o', label='Seen Plates')
-    plt.errorbar(x + 0.5, ood_mean_change, yerr=ood_std_change, fmt='o', label='Held-Out Plates')  # We add 0.5 to shift the second metric's bars to the right
+    # Nmodels = len(test_data_to_plot)
+    # ood_mean_change = np.zeros(Nmodels)
+    # ood_std_change = np.zeros(Nmodels)
+    # for i in range(Nmodels):
+    #     fractional_change = (ood_test_out_data_to_plot[i]-iid_test_out_data_to_plot[i])/iid_test_out_data_to_plot[i]
+    #     ood_mean_change[i]= np.mean(fractional_change)
+    #     ood_std_change[i] = np.std(fractional_change)
 
-    # Add vertical dotted lines
-    for i in range(len(models) - 1):
-        plt.axvline(x=2*(i)+1.25, color='grey', linestyle='dotted')
-    # Set up x-axis labels and title
-    plt.xticks(x + 0.25, model_names)  # We add 0.25 to center the labels
-    # plt.xlabel('Model')
-    plt.ylabel('Change in Accuracy')
-    plt.legend()
-    plt.savefig(plot_save_dir+'channel_comparisons.png',dpi=500, bbox_inches='tight')
+
+    # plt.style.use('bmh')
+    # # Create a figure instance
+    # fig = plt.figure()
+    # # Create an array for the x positions of the bars
+    # x = np.arange(len(models)) * 2  # We multiply by 2 to leave space for each model's two bars
+
+    # # Create error bar plots
+    # plt.errorbar(x, iid_mean_change, yerr=iid_std_change, fmt='o', label='Seen Plates')
+    # plt.errorbar(x + 0.5, ood_mean_change, yerr=ood_std_change, fmt='o', label='Held-Out Plates')  # We add 0.5 to shift the second metric's bars to the right
+
+    # # Add vertical dotted lines
+    # for i in range(len(models) - 1):
+    #     plt.axvline(x=2*(i)+1.25, color='grey', linestyle='dotted')
+    # # Set up x-axis labels and title
+    # plt.xticks(x + 0.25, model_names)  # We add 0.25 to center the labels
+    # # plt.xlabel('Model')
+    # plt.ylabel('Change in Accuracy')
+    # plt.legend()
+    # plt.savefig(plot_save_dir+'channel_comparisons.png',dpi=500, bbox_inches='tight')
 
 if __name__ == "__main__":
 
