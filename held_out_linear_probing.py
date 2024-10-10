@@ -164,20 +164,24 @@ def main(config) -> None:
 
     #subset into train,val,test,test_out 
     held_out_compound_df = probing_df.loc[probing_df['split']=='test_out_compound']
-    held_out_all_df = probing_df.loc[probing_df['split']=='test_out_all']
+    held_out_all_df = probing_df.loc[probing_df['split']=='test_out_all_']
 
 
     num_epochs = config["num_epochs"]
     log_dir = config["log_dir"]
     patience = config["patience"]
 
+    num_folds = config["num_folds"]
 
-    skf = StratifiedKFold(n_splits=5)
+
+    skf = StratifiedKFold(n_splits=num_folds)
 
     last_layer = config["last_layer"]
     feature_cols = [col for col in held_out_compound_df.columns if col.startswith(last_layer)]
     X = held_out_compound_df[feature_cols].values
     y = held_out_compound_df['TARGET'].values
+    print("X shape: {}, y shape: {}".format(X.shape,y.shape),flush=True)
+
     X_out = held_out_all_df[feature_cols].values
     y_out = held_out_all_df['TARGET'].values
     embed_dim = X_out.shape[1]
@@ -185,6 +189,8 @@ def main(config) -> None:
     test_metrics = []
     test_out_metrics = []
     for i, (train_index, test_index) in enumerate(skf.split(X, y)):
+
+        print("Fold {}/{}".format(i+1,num_folds),flush=True)
 
         train_x = X[train_index]
         train_y = y[train_index]
@@ -207,16 +213,16 @@ def main(config) -> None:
         dl_ood = DataLoader(ds_ood,batch_size=batch_size, shuffle=False)
 
         tm,tom = run_linear_probe(seed,log_dir+'_'+str(i),num_epochs,patience,embed_dim,num_classes,
-        dl_train,dl_val,dl_test,dl_out)
+        dl_train,dl_test,dl_ood)
 
         test_metrics.append(tm)
         test_out_metrics.append(tom)
 
     #Save
     metrics_dir = config["metrics_dir"]
-    with open(metrics_dir+'test_metrics_'+model_name+'.pkl', 'wb') as handle:
+    with open(metrics_dir+'held_out_compound_test_metrics_'+model_name+'.pkl', 'wb') as handle:
         pickle.dump(test_metrics, handle, protocol=pickle.HIGHEST_PROTOCOL)
-    with open(metrics_dir+'test_out_metrics_'+model_name+'.pkl', 'wb') as handle:
+    with open(metrics_dir+'held_out_compound_test_ood_metrics_'+model_name+'.pkl', 'wb') as handle:
         pickle.dump(test_out_metrics, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
 

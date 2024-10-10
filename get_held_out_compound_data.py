@@ -15,7 +15,7 @@ def get_probing_data(plates,controls,num_samples,last_layer,seed):
     plates['compound'] = plates.apply(lambda row: row['split'].split('_JCP',1)[1] if pd.notnull(row['split']) else np.nan, axis=1)
     plates['split'] = plates.apply(lambda row: row['split'].split('_JCP',1)[0] if pd.notnull(row['split']) else np.nan, axis=1)
 
-    held_out_splits = ['test_out_compound','test_out_all']
+    held_out_splits = ['test_out_compound','test_out_all_']
     wells_held_out = plates.loc[plates['split'].isin(held_out_splits)]
 
     wells_held_out['well_coords'] = wells_held_out.apply(lambda row: str(row['ROW'])+','+str(row['COLUMN']), axis=1)
@@ -31,8 +31,6 @@ def get_probing_data(plates,controls,num_samples,last_layer,seed):
     label_mapper = {target_names[i]: i for i in range(len(target_names))}
 
     held_out_feat["TARGET"] = held_out_feat["compound"].map(label_mapper)
-
-    feature_df = feature_df.rename(columns=lambda x: 'embedding_' + x.split("_")[-1] if x.startswith(last_layer) else x)
 
     return held_out_feat 
 
@@ -63,11 +61,12 @@ def main(config) -> None:
 
     probing_df = pd.DataFrame([])
     for i in range(len(feature_dirs)):
-        print("Processing file: {}/{}".format(i+1,len(feature_dirs)))
+        print("Processing file: {}/{}: ".format(i+1,len(feature_dirs)),flush=True)
 
         with open(model_dir + feature_dirs[i] + "/user_config.yaml", "r") as f:
             user_config = yaml.safe_load(f)
         plate_id = user_config["barcode"][0].split("_")[1]
+        print("Plate: {}: ".format(plate_id),flush=True)
         controls = pd.read_csv(controls_dir + plate_id + "_controls.csv", index_col=0)
 
         feature_path = glob.glob(model_dir+feature_dirs[i]+features_string + "/*.csv")[0]
