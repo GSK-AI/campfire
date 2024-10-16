@@ -15,7 +15,6 @@ def set_split(row,held_out_compounds):
     else:
         return 'test_out_plate_'
 
-
 def get_held_out_compounds(compound_list,control_list,N_held_out,):
 
     compound_list_wout_controls = compound_list[~np.in1d(compound_list,control_list)]
@@ -31,7 +30,7 @@ def get_held_out_compounds(compound_list,control_list,N_held_out,):
 
     return held_out_compounds
 
-def split_target_plates(wells,control_list,N_held_out,hold_out_target_plates):
+def split_target_plates(wells,control_list,N_held_out,hold_out_target_plates,seed):
 
     Ncompounds = np.unique(wells["Metadata_JCP2022"].values).shape[0]
     assert Ncompounds == 302, "Unexpected number of compounds in TARGET2 plates"
@@ -41,7 +40,7 @@ def split_target_plates(wells,control_list,N_held_out,hold_out_target_plates):
 
     held_out_compounds = get_held_out_compounds(compound_list,control_list,N_held_out)
 
-    rn.seed(10)
+    rn.seed(seed)
 
     wells['split'] = np.nan
     # For all compounds in the set of plates
@@ -52,7 +51,7 @@ def split_target_plates(wells,control_list,N_held_out,hold_out_target_plates):
         #of those wells, gather those in held out plates
         held_out_wells = wells_with_compound.loc[wells_with_compound['Metadata_Plate'].isin(hold_out_target_plates)]
         #and asisgn new column to determine their split via set_split (either test_out_all or test_out_plate)
-        held_out_wells['split'] = held_out_wells.apply(set_split,axis=1)
+        held_out_wells['split'] = held_out_wells.apply(set_split,args=(held_out_compounds,),axis=1)
 
         #Find wells _NOT_ in held out plates
         not_held_out_wells =  wells_with_compound.loc[~wells_with_compound['Metadata_Plate'].isin(hold_out_target_plates)]
@@ -125,11 +124,14 @@ def split_target_plates(wells,control_list,N_held_out,hold_out_target_plates):
 
     return wells,held_out_compounds
 
+def add_prefix(cell,string):
+    
+    return string + str(cell)
 
 def split_compound_plates(wells,held_out_compounds,frac_compound_wells_in_train):
 
     Ncompounds = np.unique(wells["Metadata_JCP2022"].values).shape[0]
-    assert Ncompounds == 58457, "Unexpected number of compounds in Compound plates"
+    assert Ncompounds == 58457, "Unexpected number of compounds in Compound plates,{}".format(Ncompounds)
 
     compound_plate_compound_ids = wells["Metadata_JCP2022"].values
     compound_list = np.unique(compound_plate_compound_ids)
@@ -170,6 +172,44 @@ def split_compound_plates(wells,held_out_compounds,frac_compound_wells_in_train)
 
     return wells
 
+def create_control_csv(wells,plates,csv_path):
+
+    ctr = 0
+    for plate_name in plates: 
+        
+        print("Writing plate {}/{}".format(ctr+1,len(plates)),flush=True)
+        plate = wells.loc[wells["Metadata_Plate"]==plate_name]
+        well_list = plate["Metadata_Well"].values
+        row_list = np.unique([well[0] for well in well_list])
+        col_list = np.unique([well[-2:] for well in well_list])
+        Ncols = 26
+
+        dict_of_controls = {}
+        for row_id in row_list:
+            well_row = plate.loc[plate["Metadata_Well"].str.startswith(row_id)]
+            compound_list = []
+            idx=0
+            for col_id in col_list:
+                well = well_row.loc[well_row["Metadata_Well"].str.endswith(col_id)]
+                meta_name = well["Metadata_JCP2022"].values
+                split = well['split'].values
+                print(meta_name)
+                if len(meta_name)==0:
+                    meta_name = ['NaN']
+                    compound_list.extend(meta_name)
+                else:
+                    compound_list.extend(split+'_'+meta_name)
+                idx+=1
+            dict_of_controls[row_id] = compound_list
+
+        control_tmp = pd.DataFrame(dict_of_controls)
+        control_tmp = control_tmp.T
+
+        new_columns = list(range(1, 25))
+        control_tmp.columns = new_columns
+        control_tmp.to_csv(csv_path+plate_name+'_controls.csv')
+
+
 
 
 def main(config) -> None:
@@ -186,7 +226,6 @@ def main(config) -> None:
     # Compounds: map from compound key to inchikey etc 
     plates = pd.read_csv(config['plate_dir'])
     wells = pd.read_csv(config['well_dir'])
-    compounds = pd.read_csv(config['compound_dir'])
 
     num_compounds_held_out = config['num_compounds_held_out']
 
@@ -202,14 +241,27 @@ def main(config) -> None:
 
 
     target_wells = wells.loc[wells["Metadata_Plate"].isin(target_plates)]
+    compound_wells = wells.loc[wells["Metadata_Plate"].isin(compound_plates)]
 
     control_list = config['control_list']
     frac_compound_wells_in_train = config['frac_compound_wells_in_train']
 
-    target_wells, held_out_compounds = split_target_plates(target_wells,control_list,num_compounds_held_out,hold_out_target_plates)
-    compound_plate_wells = split_compound_plates(wells,held_out_compounds,frac_compound_wells_in_train)
+    target_plate_wells, held_out_compounds = split_target_plates(target_wells,control_list,num_compounds_held_out,hold_out_target_plates,seed)
+    print("Target plates split.",flush=True)
+    compound_plate_wells = split_compound_plates(compound_wells,held_out_compounds,frac_compound_wells_in_train)
+    print("Compound plates split.",flush=True)
 
-    return compound_list
+    csv_path = config['control_csv_path']
+
+    create_control_csv(target_plate_wells,target_plates,csv_path)
+    print("Target plate controls written.",flush=True)
+    create_control_csv(compound_plate_wells,compound_plates,csv_path)
+    print("Compound plate controls written.",flush=True)
+
+
+
+
+    return 0
 
 
 
@@ -227,6 +279,9 @@ if __name__ == "__main__":
 
     yaml_file = open(f"{args.config}")
     config = yaml.load(yaml_file, Loader=yaml.FullLoader)
+
+    with open(config['control_csv_path']+'controls.yaml', 'w') as file:
+        yaml.dump(config, file)
 
     main(config)
 
