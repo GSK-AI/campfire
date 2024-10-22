@@ -19,8 +19,6 @@ def n_fold_nn_classifier(X_iid,y_iid,X_ood,y_ood,num_folds):
     validation.
 
     """
-
-
     skf = StratifiedKFold(n_splits=num_folds)
 
     iid_acc = []
@@ -57,8 +55,8 @@ def main(config) -> None:
     model_name = config["model_name"]
 
     #load probing_df
-    well_data_dir = config["well_data_dir"]
-    well_data_file_name =  config["well_data_file_name"]
+    well_data_dir = config["eval_data_dir"]
+    well_data_file_name =  config["eval_data_file_name"]
     well_df = pd.read_csv(well_data_dir+well_data_file_name+'_'+str(model_name)+'.csv')
 
     iid_split = config["iid_split"]
