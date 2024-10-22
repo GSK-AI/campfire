@@ -7,6 +7,47 @@ import pickle
 from sklearn.model_selection import StratifiedKFold
 from sklearn.neighbors import KNeighborsClassifier
 
+
+def n_fold_nn_classifier(X_iid,y_iid,X_ood,y_ood,num_folds):
+    """
+    
+    Build a NN classifier with manhattan distance metric, 
+    using IID data. Evaluate the accuracy of this classifier
+    on IID and OOD data, returning accuracy for both.
+
+    Repeat this for num_folds in stratified k-fold cross
+    validation.
+
+    """
+
+
+    skf = StratifiedKFold(n_splits=num_folds)
+
+    iid_acc = []
+    ood_acc = []
+    for _, (train_index, test_index) in enumerate(skf.split(X_iid, y_iid)):
+
+        X_train = X_iid[train_index]
+        y_train = y_iid[train_index]
+
+        X_test = X_iid[test_index]
+        y_test = y_iid[test_index]
+        
+
+        neigh = KNeighborsClassifier(n_neighbors=1,metric='manhattan')
+        neigh.fit(X_train, y_train)
+
+        y_pred = neigh.predict(X_test)
+
+        iid_acc.append(np.sum(y_pred == y_test)/len(y_test))
+
+        y_pred_ood = neigh.predict(X_ood)
+
+        ood_acc.append(np.sum(y_pred_ood == y_ood)/len(y_ood))
+
+
+    return iid_acc,ood_acc
+
 def main(config) -> None:
     """
     Main Function:
@@ -36,30 +77,10 @@ def main(config) -> None:
     X_ood = ood_df[feature_cols].values
     y_ood = ood_df['TARGET'].values
 
-    num_folds = 5 
-    skf = StratifiedKFold(n_splits=num_folds)
+    num_folds = config["num_folds"]
 
-    iid_acc = []
-    ood_acc = []
-    for i, (train_index, test_index) in enumerate(skf.split(X_iid, y_iid)):
+    iid_acc,ood_acc = n_fold_nn_classifier(X_iid,y_iid,X_ood,y_ood,num_folds)
 
-        X_train = X_iid[train_index]
-        y_train = y_iid[train_index]
-
-        X_test = X_iid[test_index]
-        y_test = y_iid[test_index]
-        
-
-        neigh = KNeighborsClassifier(n_neighbors=1,metric='manhattan')
-        neigh.fit(X_train, y_train)
-
-        y_pred = neigh.predict(X_test)
-
-        iid_acc.append(np.sum(y_pred == y_test)/len(y_test))
-
-        y_pred_ood = neigh.predict(X_ood)
-
-        ood_acc.append(np.sum(y_pred_ood == y_ood)/len(y_ood))
 
     #Save
     metrics_dir = config["metrics_dir"]
