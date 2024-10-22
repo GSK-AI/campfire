@@ -1,9 +1,9 @@
 import subprocess
 
 scripts_in_order = [
-    'get_held_out_compound_data.py',
-    'held_out_linear_probing.py',
-    'plot_held_out_comparison.py'
+    'data_collection/get_held_out_compound_data.py',
+    'modelling/held_out_linear_probing.py',
+    'plotting/plot_held_out_comparison.py'
 ]
 
 for script in scripts_in_order:
