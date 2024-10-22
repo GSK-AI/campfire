@@ -6,4 +6,4 @@ scripts_in_order = [
 ]
 
 for script in scripts_in_order:
-    subprocess.check_call(['python', script, '-c', 'config.yaml'])
+    subprocess.check_call(['python', script, '-c', 'configs/config.yaml'])
