@@ -32,32 +32,84 @@ To evaluate models when dealing with images of cells subject to out-of-distribut
 
 Here we provide details of which config files and code were used to generate each figure and table within our manuscript.
 
-#### 2.1. Results for Table 3.2
-To generate results shown in Table 3.2, use the following:
+
+#### 2.1. Results for Table 3.1
+To generate results shown in Table 3.1, use the following:
 ```
-python runners/run_held_out_pipeline.py 
+python runners/run_linear_pipeline.py 
 ```
 with the config file set to 
-1. `configs/unseen_channel/held_out/fvit_s3.yaml` 
-2. `configs/unseen_channel/held_out/dino_vits8.yaml`.
+1. `configs/models/dino_vits8.yaml`
+2. `configs/models/dino_vitl14.yaml`
+3. `configs/models/campfire.yaml`  
+and 
+```
+python runners/run_held_out_linear_pipeline.py 
+```
+with the config file set to 
+1. `configs/models/dino_vits8.yaml`
+2. `configs/models/dino_vitl14.yaml`
+3. `configs/models/campfire.yaml`  
 
-#### 2.2. Results for Table 3.3
+#### 2.2. Results for Figure 3.1
+To generate results shown in Figure 3.1, use the following:
+```
+python runners/run_linear_pipeline.py 
+```
+with the config file set to 
+1. `configs/channel_integration/nucleus.yaml` 
+2. `configs/channel_integration/actin.yaml` 
+3. `configs/channel_integration/mitochondria.yaml` 
+4. `configs/channel_integration/nucleus_actin.yaml`
+5. `configs/channel_integration/nucleus_mitochondria.yaml`
+6. `configs/models/campfire.yaml`
+```
+python runners/run_held_out_linear_pipeline.py 
+```
+with the config file set to 
+1. `configs/channel_integration/held_out/nucleus.yaml` 
+2. `configs/channel_integration/held_out/actin.yaml` 
+3. `configs/channel_integration/held_out/mitochondria.yaml` 
+4. `configs/channel_integration/held_out/nucleus_actin.yaml`
+5. `configs/channel_integration/held_out/nucleus_mitochondria.yaml`
+6. `configs/models/campfire.yaml`
+
+
+#### 2.3. Results for Table 3.2
+To generate results shown in Table 3.2, use the following:
+```
+python runners/run_linear_pipeline.py 
+```
+with the config file set to 
+1. `configs/batch_generalisation/1_plates.yaml` 
+2. `configs/batch_generalisation/5_plates.yaml` 
+3. `configs/batch_generalisation/10_plates.yaml`   
+and
+```
+python runners/run_held_out_linear_pipeline.py 
+```
+with the config file set to 
+1. `configs/batch_generalisation/held_out/1_plates.yaml` 
+2. `configs/batch_generalisation/held_out/5_plates.yaml` 
+3. `configs/batch_generalisation/held_out/10_plates.yaml` 
+
+#### 2.4. Results for Table 3.3
 To generate results shown in Table 3.3, use the following:
 ```
 python runners/run_linear_pipeline.py 
 ```
 with the config file set to 
 1. `configs/unseen_channel/fvit_s3.yaml` 
-2. `configs/unseen_channel/dino_vits8.yaml`
+2. `configs/unseen_channel/dino_vits8.yaml`  
 and
 ```
-python runners/run_held_out_pipeline.py 
+python runners/run_held_out_linear_pipeline.py 
 ```
 with the config file set to 
 1. `configs/unseen_channel/held_out/fvit_s3.yaml` 
 2. `configs/unseen_channel/held_out/dino_vits8.yaml`.
 
-#### 2.3. Results for Figure 3.2
+#### 2.5. Results for Figure 3.2
 To generate results shown in Figure 3.2, use the following:
 ```
 python modelling/macrophage_embeddings.py -c $CONFIG
@@ -66,7 +118,7 @@ with $CONFIG set to
 1. `configs/finetuning/config_fvit_head.yaml` 
 2. `configs/finetuning/config_dino_head.yaml`.
 
-#### 2.4. Results for Figure 3.3
+#### 2.6. Results for Figure 3.3
 To generate results shown in Figure 3.3, use the following:
 ```
 python modelling/macrophage_zprime.py -c $CONFIG
