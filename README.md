@@ -14,6 +14,11 @@ python create_controls.py -c controls_config.yaml
 ```
 This will generate a .csv file for each of the TARGET2 and COMPOUND plates in Source 3. These .csv files are plate maps, such that each cell will describe the position on the 384-well plate, the compound with which it was stimulated, and the split to which it has been assigned. Using the provided config will generate the same set of data splits used to train \textbf{Campfire}. 
 
+### 2. Given a set of embeddings, run linear probing, predicting 1-of-9 controls 
+
+In our manuscript, we evaluate models for fluorscence microscopy by training a linear layer with single cell embeddings to predict 1-of-9 controls. 
+By running `python runners/run_linear_pipeline.py` will trigger a pipleline, that via a config file, set within `runners/run_linear_pipeline.py`, takes a .csv file containing all single cell embeddings for TARGET2 plates, samples single cell embeddings from each well, assigns them to data splits, and then trains several linear layers using different subsets of the training set. The output of this will be the performance metrics for the in-distribution test set and out-of-distribution test set, for the model specified by the config file. 
+
 
 To generate results shown in Tab. 3.3, use the following:
 ```
