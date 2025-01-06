@@ -1,4 +1,4 @@
-# channel_agnostic_vit
+# CAMPFIRE: Downstream evaluations of channel agnostic vision transformer
 Repository for code used to run experiments in "Out-of-distribution evaluations of channel agnostic masked autoencoders in fluorescence microscopy"
 
 ### 1. How to use code to pretrain, and evaluate channel agnostic model 
@@ -47,9 +47,9 @@ and
 python runners/run_held_out_linear_pipeline.py 
 ```
 with the config file set to 
-1. `configs/models/dino_vits8.yaml`
-2. `configs/models/dino_vitl14.yaml`
-3. `configs/models/campfire.yaml`  
+1. `configs/models/held_out/dino_vits8.yaml`
+2. `configs/models/held_out/dino_vitl14.yaml`
+3. `configs/models/held_out/campfire.yaml`  
 
 #### 2.2. Results for Figure 3.1
 To generate results shown in Figure 3.1, use the following:
@@ -72,8 +72,13 @@ with the config file set to
 3. `configs/channel_integration/held_out/mitochondria.yaml` 
 4. `configs/channel_integration/held_out/nucleus_actin.yaml`
 5. `configs/channel_integration/held_out/nucleus_mitochondria.yaml`
-6. `configs/models/campfire.yaml`
+6. `configs/models/campfire.yaml`.
 
+Following this, to generate the figures, run 
+`python plot_channel_integration.py -c $CONFIG`  
+with CONFIG set to 
+1. `configs/channel_integration/channel_integration.yaml` 
+2. `configs/channel_integration/held_out/channel_integration.yaml`.
 
 #### 2.3. Results for Table 3.2
 To generate results shown in Table 3.2, use the following:
