@@ -1,5 +1,5 @@
 
-# DinoV2 - L14
+# Dinov2-ViT L14
 # seed: 100
 # last_layer: 'backbone.aggregate'
 # num_samples: 30
@@ -10,7 +10,7 @@
 # model_dir: /hpc/scratch/weka01/cjh86475/channel_agnostic_model/featurisation/dinov2_vitl14/
 # controls_dir: /hdd_scratch2/cjh86475/channel_agnostic_model/controls/jump/source3/
 # eval_data_dir: /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/dinov2_vitl14/
-# eval_data_file_name: held_out_compounds_data
+# eval_data_file_name: held_out_aggregate_data
 # num_epochs: 100
 # log_dir: /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/dinov2_vitl14/lightning_logs/
 # metrics_dir: /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/dinov2_vitl14/
@@ -18,10 +18,8 @@
 # model_name: dinov2_vitl14
 # plot_save_dir: /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/dinov2_vitl14/
 
-comparison_model_name: 'MAE'
 
-
-# DinoViT-S8
+#DINOViT- s8
 # seed: 100
 # last_layer: 'backbone.aggregate'
 # num_samples: 30
@@ -32,7 +30,7 @@ comparison_model_name: 'MAE'
 # model_dir: /hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/jump_featurization/models/dino_vits8_imagenet/
 # controls_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/controls/jump/source3/'
 # eval_data_dir: '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/dino_vits8_imagenet/'
-# eval_data_file_name: held_out_compounds_data
+# eval_data_file_name: held_out_aggregate_data
 # num_epochs: 100
 # log_dir: '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/dino_vits8_imagenet/lightning_logs/'
 # metrics_dir: /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/dino_vits8_imagenet/
@@ -41,7 +39,7 @@ comparison_model_name: 'MAE'
 # plot_save_dir: '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/dino_vits8_imagenet/'
 
 
-#FViT-s3
+#FViT-S3 
 seed: 100
 last_layer: 'encoder.head'
 num_samples: 30
@@ -52,7 +50,7 @@ ood_split: test_out_all_
 model_dir: /hpc/scratch/weka01/cjh86475/channel_agnostic_model/featurisation/source3_rope/
 controls_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/controls/jump/source3/'
 eval_data_dir: '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/fvit_s3_rope/'
-eval_data_file_name: held_out_compounds_data
+eval_data_file_name: held_out_aggregate_data
 num_epochs: 100
 log_dir: '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/fvit_s3_rope/lightning_logs/'
 metrics_dir: /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/fvit_s3_rope/
@@ -61,7 +59,9 @@ model_name: mae
 plot_save_dir: '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/fvit_s3_rope/'
 
 
-# control_ids: 
+
+comparison_model_name: 'MAE'
+
 
 
 control_ids: ['2022_033924',
@@ -76,21 +76,16 @@ control_ids: ['2022_033924',
 
 
 held_out_compounds_test_metric_dirs:
-- '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/dino_vits8_imagenet/held_out_compound_test_metrics_dino_vits8_imagenet.pkl'
-- '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/channel_integration/3_channels/held_out_compound_test_metrics_mae.pkl'
-- '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/fvit_s3_rope/held_out_compound_test_metrics_mae.pkl'
-- '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/dinov2_vitl14/held_out_compound_test_metrics_dinov2_vitl14.pkl'
-
+- '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/fvit_s3_rope/nn_iid_accuracy_mae.pkl'
+- '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/dinov2_vitl14/nn_iid_accuracy_dinov2_vitl14.pkl'
+- '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/dino_vits8_imagenet/nn_iid_accuracy_dino_vits8_imagenet.pkl'
 held_out_compounds_test_out_metric_dirs:
-- '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/dino_vits8_imagenet/held_out_compound_test_ood_metrics_dino_vits8_imagenet.pkl'
-- '/hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/channel_integration/3_channels/held_out_compound_test_ood_metrics_mae.pkl'
-- '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/fvit_s3_rope/held_out_compound_test_ood_metrics_mae.pkl'
-- '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/dinov2_vitl14/held_out_compound_test_ood_metrics_dinov2_vitl14.pkl'
-
+- '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/fvit_s3_rope/nn_ood_accuracy_mae.pkl'
+- '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/dinov2_vitl14/nn_ood_accuracy_dinov2_vitl14.pkl'
+- '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/dino_vits8_imagenet/nn_ood_accuracy_dino_vits8_imagenet.pkl'
 held_out_compounds_model_names: 
-- DinoViT-S8
 - MAE
-- 'MAE (All source 3)'
-- DinoViT-L14
+- Dino-L14
+- Dino-S8
 
-held_out_compounds_plot_save_dir: '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/held_out_compound/'
+held_out_compounds_plot_save_dir: /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/held_out_compound/well_level/

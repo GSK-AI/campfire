@@ -1,0 +1,33 @@
+seed: 100
+last_layer: 'aggregate'
+num_samples: 100
+num_runs: 10
+batch_size: 32
+iid_split: test_out_compound
+ood_split: test_out_all_
+model_dir: /hpc/scratch/weka01/cjh86475/channel_agnostic_model/featurisation/unseen_channel/dino_vits8_gcp/
+controls_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/controls/jump/source3/'
+eval_data_dir: '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/unseen_channel/dino_vits8/'
+eval_data_file_name: linear_probing
+num_epochs: 100
+log_dir: '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/unseen_channel/dino_vits8/lightning_logs/'
+metrics_dir: /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/unseen_channel/dino_vits8/
+patience: 25
+model_name: dino_vits8
+plot_save_dir: '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/unseen_channel/'
+
+
+
+test_metric_dirs:
+- /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/unseen_channel/fvit_s3/test_metrics_mae.pkl
+- /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/unseen_channel/dino_vits8/test_metrics_dino_vits8.pkl
+
+test_out_metric_dirs:
+- /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/unseen_channel/fvit_s3/test_out_metrics_mae.pkl
+- /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/unseen_channel/dino_vits8/test_out_metrics_dino_vits8.pkl
+
+model_names: 
+- 'MAE'
+- 'DinoViT-S8'
+
+comparison_model_name: 'MAE'

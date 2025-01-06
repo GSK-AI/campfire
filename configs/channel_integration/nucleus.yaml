@@ -1,124 +1,5 @@
 
-
-
-# DinoV2 - L14 
-# seed: 100
-# last_layer: 'backbone.aggregate'
-# num_samples: 100
-# num_runs: 10
-# batch_size: 32
-# model_dir: /hpc/scratch/weka01/cjh86475/channel_agnostic_model/featurisation/dinov2_vitl14/
-# controls_dir: /hdd_scratch2/cjh86475/channel_agnostic_model/controls/jump/source3/
-# eval_data_dir: /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/dinov2_vitl14/
-# eval_data_file_name: linear_probing
-# num_epochs: 100
-# log_dir: /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/dinov2_vitl14/lightning_logs/
-# metrics_dir: /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/dinov2_vitl14/
-# patience: 25
-# model_name: dinov2_vitl14
-# plot_save_dir: /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/control_compounds/
-
-
-# DinoViT - S8 
-# seed: 100
-# last_layer: 'backbone.aggregate'
-# num_samples: 100
-# num_runs: 10
-# batch_size: 32
-# iid_split: test_out_compound
-# ood_split: test_out_all_
-# model_dir: /hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/jump_featurization/models/dino_vits8_imagenet/
-# controls_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/controls/jump/source3/'
-# eval_data_dir: '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/dino_vits8_imagenet/'
-# eval_data_file_name: linear_probing
-# num_epochs: 100
-# log_dir: '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/dino_vits8_imagenet/lightning_logs/'
-# metrics_dir: /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/dino_vits8_imagenet/
-# patience: 25
-# model_name: dino_vits8_imagenet
-# plot_save_dir: '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/dino_vits8_imagenet/'
-
-
-
-# FViT-S3 
-# seed: 100
-# last_layer: 'encoder.head'
-# num_samples: 100
-# num_runs: 10
-# batch_size: 32
-# iid_split: test_out_compound
-# ood_split: test_out_all_
-# model_dir: /hpc/scratch/weka01/cjh86475/channel_agnostic_model/featurisation/source3_rope/
-# controls_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/controls/jump/source3/'
-# eval_data_dir: '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/fvit_s3_rope/'
-# eval_data_file_name: linear_probing
-# num_epochs: 100
-# log_dir: '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/fvit_s3_rope/lightning_logs/'
-# metrics_dir: /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/fvit_s3_rope/
-# patience: 25
-# model_name: mae
-# plot_save_dir: '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/fvit_s3_rope/'
-
-
-# FViT-S3 - Nuclues + Mitochondria 
-# seed: 100
-# last_layer: 'encoder.head'
-# num_samples: 100
-# num_runs: 10
-# batch_size: 32
-# iid_split: test_out_compound
-# ood_split: test_out_all_
-# model_dir: /hpc/scratch/weka01/cjh86475/channel_agnostic_model/featurisation/nucleus_mitochondria/
-# controls_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/controls/jump/source3/'
-# eval_data_dir: '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/nucleus_mitochondria/'
-# eval_data_file_name: linear_probing
-# num_epochs: 100
-# log_dir: '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/nucleus_mitochondria/lightning_logs/'
-# metrics_dir: /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/nucleus_mitochondria/
-# patience: 25
-# model_name: mae
-# plot_save_dir: '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/nucleus_mitochondria/'
-
-# FViT-S3 - Nucleus + Actin 
-# seed: 100
-# last_layer: 'encoder.head'
-# num_samples: 100
-# num_runs: 10
-# batch_size: 32
-# iid_split: test_out_compound
-# ood_split: test_out_all_
-# model_dir: /hpc/scratch/weka01/cjh86475/channel_agnostic_model/featurisation/nucleus_actin/
-# controls_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/controls/jump/source3/'
-# eval_data_dir: '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/nucleus_actin/'
-# eval_data_file_name: linear_probing
-# num_epochs: 100
-# log_dir: '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/nucleus_actin/lightning_logs/'
-# metrics_dir: /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/nucleus_actin/
-# patience: 25
-# model_name: mae
-# plot_save_dir: '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/nucleus_actin/'
-
-
-# # FViT-S3 - Actin 
-# seed: 100
-# last_layer: 'encoder.head'
-# num_samples: 100
-# num_runs: 10
-# batch_size: 32
-# iid_split: test_out_compound
-# ood_split: test_out_all_
-# model_dir: /hpc/scratch/weka01/cjh86475/channel_agnostic_model/featurisation/actin/
-# controls_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/controls/jump/source3/'
-# eval_data_dir: '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/actin/'
-# eval_data_file_name: linear_probing
-# num_epochs: 100
-# log_dir: '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/actin/lightning_logs/'
-# metrics_dir: /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/actin/
-# patience: 25
-# model_name: mae
-# plot_save_dir: '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/actin/'
-
-# FViT-S3 - Mitochondria
+# FViT-S3 - Nucleus
 seed: 100
 last_layer: 'encoder.head'
 num_samples: 100
@@ -126,16 +7,16 @@ num_runs: 10
 batch_size: 32
 iid_split: test_out_compound
 ood_split: test_out_all_
-model_dir: /hpc/scratch/weka01/cjh86475/channel_agnostic_model/featurisation/mitochondria/
+model_dir: /hpc/scratch/weka01/cjh86475/channel_agnostic_model/featurisation/nucleus/
 controls_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/controls/jump/source3/'
-eval_data_dir: '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/mitochondria/'
+eval_data_dir: '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/nucleus/'
 eval_data_file_name: linear_probing
 num_epochs: 100
-log_dir: '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/mitochondria/lightning_logs/'
-metrics_dir: /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/mitochondria/
+log_dir: '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/nucleus/lightning_logs/'
+metrics_dir: /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/nucleus/
 patience: 25
 model_name: mae
-plot_save_dir: '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/mitochondria/'
+plot_save_dir: '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/nucleus/'
 
 
 
@@ -241,6 +122,7 @@ channel_integration_test_metric_dirs:
 # - /hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/channel_integration/nucleus_actin/test_metrics_mae.pkl
 # - /hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/channel_integration/nucleus_mitochondria/test_metrics_mae.pkl
 # - /hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/channel_integration/3_channels/test_metrics_mae.pkl
+- /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/nucleus/test_metrics_mae.pkl
 - /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/actin/test_metrics_mae.pkl
 - /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/mitochondria/test_metrics_mae.pkl
 - /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/nucleus_actin/test_metrics_mae.pkl
@@ -256,6 +138,7 @@ channel_integration_test_out_metric_dirs:
 # - /hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/channel_integration/nucleus_actin/test_out_metrics_mae.pkl
 # - /hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/channel_integration/nucleus_mitochondria/test_out_metrics_mae.pkl
 # - /hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/model_evaluations/new/channel_integration/3_channels/test_out_metrics_mae.pkl
+- /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/nucleus/test_out_metrics_mae.pkl
 - /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/actin/test_out_metrics_mae.pkl
 - /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/mitochondria/test_out_metrics_mae.pkl
 - /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/nucleus_actin/test_out_metrics_mae.pkl
@@ -263,7 +146,7 @@ channel_integration_test_out_metric_dirs:
 - /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/fvit_s3_rope/test_out_metrics_mae.pkl
 
 channel_integration_model_names: 
-# - Nu 
+- Nu 
 - Ac
 - M
 - Nu, Ac 

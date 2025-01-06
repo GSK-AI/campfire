@@ -1,0 +1,28 @@
+seed: 100
+last_layer: 'encoder.head'
+num_samples: 30
+num_folds: 5
+batch_size: 32
+iid_split: test_out_compound
+ood_split: test_out_all_
+model_dir: /hpc/scratch/weka01/cjh86475/channel_agnostic_model/featurisation/unseen_channel/fvit_s3_gcp/
+controls_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/controls/jump/source3/'
+eval_data_dir: '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/unseen_channel/fvit_s3/'
+eval_data_file_name: held_out_compounds_data
+num_epochs: 100
+log_dir: '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/unseen_channel/fvit_s3/lightning_logs/'
+metrics_dir: /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/unseen_channel/fvit_s3/
+patience: 25
+model_name: mae
+plot_save_dir: '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/unseen_channel/held_out/'
+
+test_metric_dirs:
+- /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/unseen_channel/fvit_s3/held_out_compound_test_metrics_mae.pkl
+
+test_out_metric_dirs:
+- /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/unseen_channel/fvit_s3/held_out_compound_test_ood_metrics_mae.pkl
+
+model_names: 
+- 'MAE'
+
+comparison_model_name: 'MAE'
