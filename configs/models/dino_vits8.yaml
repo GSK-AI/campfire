@@ -1,0 +1,17 @@
+seed: 100
+last_layer: 'backbone.aggregate'
+num_samples: 100
+num_runs: 10
+batch_size: 32
+iid_split: test_out_compound
+ood_split: test_out_all_
+model_dir: /hdd_scratch2/cjh86475/channel_agnostic_model/experiment_outputs/jump_featurization/models/dino_vits8_imagenet/
+controls_dir: '/hdd_scratch2/cjh86475/channel_agnostic_model/controls/jump/source3/'
+eval_data_dir: '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/dino_vits8_imagenet/'
+eval_data_file_name: linear_probing
+num_epochs: 100
+log_dir: '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/dino_vits8_imagenet/lightning_logs/'
+metrics_dir: /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/dino_vits8_imagenet/
+patience: 25
+model_name: dino_vits8_imagenet
+plot_save_dir: '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/dino_vits8_imagenet/'

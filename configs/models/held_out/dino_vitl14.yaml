@@ -1,0 +1,17 @@
+seed: 100
+last_layer: 'backbone.aggregate'
+num_samples: 30
+num_folds: 5
+batch_size: 32
+iid_split: test_out_compound
+ood_split: test_out_all_
+model_dir: /hpc/scratch/weka01/cjh86475/channel_agnostic_model/featurisation/dinov2_vitl14/
+controls_dir: /hdd_scratch2/cjh86475/channel_agnostic_model/controls/jump/source3/
+eval_data_dir: /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/dinov2_vitl14/
+eval_data_file_name: held_out_compounds_data
+num_epochs: 100
+log_dir: /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/dinov2_vitl14/lightning_logs/
+metrics_dir: /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/dinov2_vitl14/
+patience: 25
+model_name: dinov2_vitl14
+plot_save_dir: /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/dinov2_vitl14/
