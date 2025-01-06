@@ -30,31 +30,47 @@ To evaluate models when dealing with images of cells subject to out-of-distribut
 
 ### 2. Generating results from manuscript 
 
-Here we provide details of which config files and code was used to generate each figure and table within our manuscript. 
+Here we provide details of which config files and code were used to generate each figure and table within our manuscript.
 
+#### 2.1. Results for Table 3.2
+To generate results shown in Table 3.2, use the following:
+```
+python runners/run_held_out_pipeline.py 
+```
+with the config file set to 
+1. `configs/unseen_channel/held_out/fvit_s3.yaml` 
+2. `configs/unseen_channel/held_out/dino_vits8.yaml`.
 
-
-
-
-To generate results shown in Tab. 3.3, use the following:
+#### 2.2. Results for Table 3.3
+To generate results shown in Table 3.3, use the following:
 ```
 python runners/run_linear_pipeline.py 
 ```
-with the config file set to 1. `/configs/unseen_channel/fvit_s3.yaml` 2. `configs/unseen_channel/dino_vits8.yaml`
+with the config file set to 
+1. `configs/unseen_channel/fvit_s3.yaml` 
+2. `configs/unseen_channel/dino_vits8.yaml`
 and
 ```
 python runners/run_held_out_pipeline.py 
 ```
-with the config file set to 1. `/configs/unseen_channel/held_out/fvit_s3.yaml` 2. `configs/unseen_channel/held_out/dino_vits8.yaml`.
+with the config file set to 
+1. `configs/unseen_channel/held_out/fvit_s3.yaml` 
+2. `configs/unseen_channel/held_out/dino_vits8.yaml`.
 
-To generate results shown in figure 3.2, use the following:
+#### 2.3. Results for Figure 3.2
+To generate results shown in Figure 3.2, use the following:
 ```
 python modelling/macrophage_embeddings.py -c $CONFIG
 ```
-with $CONFIG set to 1. `configs/finetuning/config_fvit_head.yaml` 2. `configs/finetuning/config_dino_head.yaml`.
+with $CONFIG set to 
+1. `configs/finetuning/config_fvit_head.yaml` 
+2. `configs/finetuning/config_dino_head.yaml`.
 
-To generate results shown in figure 3.3, use the following:
+#### 2.4. Results for Figure 3.3
+To generate results shown in Figure 3.3, use the following:
 ```
 python modelling/macrophage_zprime.py -c $CONFIG
 ```
-with $CONFIG set to 1. `configs/finetuning/config_fvit_head.yaml` 2. `configs/finetuning/config_dino_head.yaml`.
+with $CONFIG set to 
+1. `configs/finetuning/config_fvit_head.yaml` 
+2. `configs/finetuning/config_dino_head.yaml`.
