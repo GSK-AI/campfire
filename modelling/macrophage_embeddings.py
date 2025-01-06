@@ -6,6 +6,7 @@ import yaml
 import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.metrics import silhouette_score
 
 def compute_principle_components(df: pd.DataFrame, embedding_layer_name: str) -> pd.DataFrame:
     """
@@ -99,20 +100,22 @@ def load_plate_data(list_of_paths: list, last_layer: str) -> pd.DataFrame:
     return df
 
 # function that plots id and ood priciple components on same scatter plot, with colour of points determined by target
-def plot_principle_components(id_principle_components: pd.DataFrame, ood_principle_components: pd.DataFrame, save_path: str) -> None:
+def plot_principle_components(id_principle_components: pd.DataFrame, ood_principle_components: pd.DataFrame, save_path: str, explained_variance: np.ndarray) -> None:
     """
     Plots the principle components of in-distribution and out-of-distribution plates on the same scatter plot with color determined by target.
+    Also adds the explained variance of the top 2 principal components to the plot.
 
     Args:
         id_principle_components (pd.DataFrame): The in-distribution principle components.
         ood_principle_components (pd.DataFrame): The out-of-distribution principle components.
         save_path (str): The path to save the plot.
+        explained_variance (np.ndarray): The explained variance of the top 2 principal components.
 
     Returns:
         None
     """
-
     # Plotting
+    plt.style.use('bmh')
     plt.figure(figsize=(10, 6))
 
     # Plot the first dataset
@@ -140,11 +143,14 @@ def plot_principle_components(id_principle_components: pd.DataFrame, ood_princip
         all_handles.append(plt.Line2D([0], [0], marker='o', color='w', 
                                     markerfacecolor=scatter2.cmap(scatter2.norm(i + len(unique_targets_1))), markersize=8, label=label))
 
-    plt.legend(handles=all_handles, title="Classes", loc="upper right")
+    # Sort handles by label
+    all_handles = sorted(all_handles, key=lambda handle: handle.get_label())
+
+    plt.legend(handles=all_handles, loc="upper right", fontsize='small')
 
     # Adding axis labels and title
-    plt.xlabel('Principal Component 1')
-    plt.ylabel('Principal Component 2')
+    plt.xlabel(f'Principal Component 1 ({explained_variance[0]:.2f}%)')
+    plt.ylabel(f'Principal Component 2 ({explained_variance[1]:.2f}%)')
     plt.savefig(save_path+'/principle_components.png', bbox_inches='tight')
     return None
 
@@ -213,7 +219,7 @@ def rank_distances(df: pd.DataFrame) -> pd.DataFrame:
     ranked_df = df.rank(axis=0, ascending=False).astype(int)
     return ranked_df
 
-def process_and_save_distances(plate_data: pd.DataFrame, centroids: dict, last_layer: str, save_path: str) -> None:
+def process_and_save_distances(plate_data: pd.DataFrame, centroids: dict, last_layer: str, save_path: str, vmin: float, vmax: float) -> None:
     """
     Computes the distance to centroids for all plates, ranks the distances, and saves the results as CSV and heatmap images.
 
@@ -234,7 +240,8 @@ def process_and_save_distances(plate_data: pd.DataFrame, centroids: dict, last_l
 
     # plot the distance dataframe as a heatmap   
     plt.figure(figsize=(10, 6))
-    sns.heatmap(distance_df.set_index('target').T, cmap='viridis', annot=True, fmt=".2f")
+    sns.heatmap(distance_df.set_index('target').T, cmap='viridis', annot=True, fmt=".2f",vmin=vmin, vmax=vmax)
+    #make heatmap colorbar only between 0 and 1
     plt.title('Average Cosine Similarity Distance to Centroids')
     plt.savefig(save_path + '/distance_to_centroids_heatmap.png', bbox_inches='tight')
 
@@ -248,6 +255,23 @@ def process_and_save_distances(plate_data: pd.DataFrame, centroids: dict, last_l
     plt.title('Ranked Distances to Centroids')
     plt.savefig(save_path + '/ranked_distances_heatmap.png', bbox_inches='tight')
 
+def compute_clustering_measure(df: pd.DataFrame, embedding_layer_name: str) -> float:
+    """
+    Computes the silhouette score as a clustering measure for the targets.
+
+    Args:
+        df (pd.DataFrame): The input dataframe containing embedding columns and target column.
+        embedding_layer_name (str): The prefix of the embedding layer columns.
+
+    Returns:
+        float: The silhouette score.
+    """
+    embedding_columns = [col for col in df.columns if col.startswith(embedding_layer_name)]
+    X = df[embedding_columns].values
+    y = df['compound+state'].values
+    score = silhouette_score(X, y)
+    return score
+
 def main(config) -> None:
     """
     Main Function:
@@ -257,6 +281,14 @@ def main(config) -> None:
     paths_to_controls = config["paths_to_controls"]
     plate_barcodes = config["plate_barcodes"]
     id_barcodes = config["id_barcodes"]
+    vmin = config["vmin"]
+    vmax = config["vmax"]
+    #if vmin and vmax are not specified in config, set them to 0 and 1 respectively
+    if vmin is None:
+        vmin = 0
+    if vmax is None:
+        vmax = 1
+        
 
     # load all plates, aggregate them by well, and concat into single data frame
     plate_data = load_plate_data(paths_to_plates, config["last_layer"])
@@ -271,13 +303,20 @@ def main(config) -> None:
     plate_data = plate_data[plate_data['compound'].isin(config["plot_compounds"])]
 
     plate_data['target'] = plate_data['compound'] + '_' + plate_data['PLATE_BARCODE']
+
+    #relabel targets according to the following
+    # take last character of PLATE_BARCODE and add to compound and 'plate_
+    plate_data['target'] = plate_data['compound'] + '_' + plate_data['PLATE_BARCODE'].apply(lambda x: 'plate_' + x[-1])
     
     #sort rows of plate_data by target
     plate_data = plate_data.sort_values(by='target')
 
     # compute the principle components of plates with barcodes that are in-distribution
     plate_data_id = plate_data[plate_data['PLATE_BARCODE'].isin(id_barcodes)]
-    id_principle_components,pca_function = compute_principle_components(plate_data_id, config["last_layer"])
+    id_principle_components, pca_function = compute_principle_components(plate_data_id, config["last_layer"])
+
+    # get explained variance
+    explained_variance = pca_function.explained_variance_ratio_[:2] * 100
 
     # apply the PCA to the out-of-distribution plates
     plate_data_ood = plate_data[~plate_data['PLATE_BARCODE'].isin(id_barcodes)]
@@ -288,13 +327,28 @@ def main(config) -> None:
     ood_principle_components.to_csv(config["save_path"]+'/ood_pc.csv', index=False)
 
     # plot the principle components
-    plot_principle_components(id_principle_components, ood_principle_components, config["save_path"])
+    plot_principle_components(id_principle_components, ood_principle_components, config["save_path"], explained_variance)
 
     # get the centroids of all plates
     centroids = get_centroids(plate_data, config["last_layer"])
 
     # process and save distances
-    process_and_save_distances(plate_data, centroids, config["last_layer"], config["save_path"])
+    process_and_save_distances(plate_data, centroids, config["last_layer"], config["save_path"], vmin, vmax)
+
+    # add column to plate_data called compound+state where state is either M1 or M2 depending on whether plate is in m2_barcodes
+    plate_data['compound+state'] = plate_data['compound'] + '_' + plate_data['PLATE_BARCODE'].apply(lambda x: 'M2' if x in config["m2_barcodes"] else 'M1')
+
+    # compute the clustering measure for compound+state
+    clustering_score = compute_clustering_measure(plate_data, config["last_layer"])
+    print(f"Clustering Measure (Silhouette Score): {clustering_score}")
+
+    # save the clustering measure
+    with open(config["save_path"] + '/clustering_measure.txt', 'w') as f:
+        f.write(f"Clustering Measure (Silhouette Score): {clustering_score}\n")
+
+    #save config file to save_path
+    with open(config["save_path"]+"/config.yaml", "w") as f:
+        yaml.dump(config, f)
 
     return None
 
