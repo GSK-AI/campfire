@@ -1,34 +1,64 @@
 ###
 import argparse
 import os
-import pathlib
-from typing import Dict
+from typing import List
 import glob
 import numpy as np 
 import pandas as pd
 import yaml
 
-def get_probing_data(plates,controls,num_samples,last_layer,seed):
+def get_aggregate_data(
+    plates: pd.DataFrame,
+    controls: pd.DataFrame,
+    control_ids: List[str],
+    last_layer: str
+    ):
+    """
+    Get Aggregate Data
 
+    Given a pandas dataframe of featurisation for 
+    single cell images from a plate, and the controls_csv
+    for that plate - this function will aggregate all 
+    embeddings for images derived from the same well. 
+
+    A new dataframe is created with each row 
+    including the aggregate embedding features, 
+    the row, column and plate barcode, as well
+    as the split the well was assigned and compound
+    used to treat the well. 
+
+    Arguments
+    ---------
+    plates: dataframe including row,column,platebarcode,
+            and embedding features
+    controls: dataframe including row, column, plate_barcode,
+             ,and a final column with split_compoundname in that format
+    control_ids: list of control_ids i.e compound names we want data for
+    last_layer: string of last layer name 
+
+    Returns
+    -------
+    pd.DataFrame
+
+    """
+
+    feature_cols = [col for col in plates.columns if col.startswith(last_layer)]
+
+    plates = plates.groupby(['ROW','COLUMN','PLATE_BARCODE'])[feature_cols].mean().reset_index()
 
     plates['split'] = plates.apply(lambda row: controls.iloc[int(row['ROW']-1), int(row['COLUMN']-1)], axis=1)
     plates['compound'] = plates.apply(lambda row: row['split'].split('_JCP',1)[1] if pd.notnull(row['split']) else np.nan, axis=1)
     plates['split'] = plates.apply(lambda row: row['split'].split('_JCP',1)[0] if pd.notnull(row['split']) else np.nan, axis=1)
 
-    held_out_splits = ['test_out_compound','test_out_all_']
-    wells_held_out = plates.loc[plates['split'].isin(held_out_splits)]
+    wells_controls  = plates.loc[plates['compound'].isin(control_ids)]
 
-    wells_held_out['well_coords'] = wells_held_out.apply(lambda row: str(row['ROW'])+','+str(row['COLUMN']), axis=1)
+    wells_controls['well_coords'] = wells_controls.apply(lambda row: str(row['ROW'])+','+str(row['COLUMN']), axis=1)
 
+    feature_cols = [col for col in wells_controls.columns if col.startswith(last_layer)] + ['compound','split']
 
-    feature_cols = [col for col in wells_held_out.columns if col.startswith(last_layer)] + ['compound','split']
-    np.random.seed(seed)
-    feature_df = wells_held_out.groupby(['well_coords'])[feature_cols].apply(lambda x: x.sample(n=num_samples, replace=False)).reset_index()
+    feature_df = wells_controls[feature_cols]
 
-    held_out_feat = feature_df
-
-    return held_out_feat 
-
+    return feature_df
 
 def main(config) -> None:
     """
@@ -58,7 +88,7 @@ def main(config) -> None:
     for i in range(len(feature_dirs)):
         print("Processing file: {}/{}: ".format(i+1,len(feature_dirs)),flush=True)
 
-        with open(model_dir + feature_dirs[i] + "/pipeline.yaml", "r") as f:
+        with open(model_dir + feature_dirs[i] + "/user_config.yaml", "r") as f:
             user_config = yaml.safe_load(f)
         plate_id = user_config["barcode"][0].split("_")[1]
         print("Plate: {}: ".format(plate_id),flush=True)
@@ -67,7 +97,7 @@ def main(config) -> None:
         feature_path = glob.glob(model_dir+feature_dirs[i]+features_string + "/*.csv")[0]
         features = pd.read_csv(feature_path)
 
-        new_probing_df= get_probing_data(features,controls,num_samples,last_layer,seed)
+        new_probing_df= get_aggregate_data(features,controls,config['control_ids'],last_layer)
 
         if i >0:
             probing_df = pd.concat([probing_df,new_probing_df])
@@ -80,7 +110,7 @@ def main(config) -> None:
 
     probing_df["TARGET"] = probing_df["compound"].map(label_mapper)
 
-    probing_df.to_csv(save_dir+'/held_out_compounds_data_'+model_name+'.csv')
+    probing_df.to_csv(save_dir+'/control_aggregate_data_'+model_name+'.csv')
 
 if __name__ == "__main__":
 

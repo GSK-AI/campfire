@@ -75,7 +75,7 @@ def main(config) -> None:
     for i in range(len(feature_dirs)):
         print("Processing file: {}/{}".format(i+1,len(feature_dirs)))
 
-        with open(model_dir + feature_dirs[i] + "/user_config.yaml", "r") as f:
+        with open(model_dir + feature_dirs[i] + "/pipeline.yaml", "r") as f:
             user_config = yaml.safe_load(f)
         plate_id = user_config["barcode"][0].split("_")[1]
         controls = pd.read_csv(controls_dir + plate_id + "_controls.csv", index_col=0)
