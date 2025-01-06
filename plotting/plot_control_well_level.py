@@ -3,11 +3,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import argparse
 import yaml
-import matplotlib.patches as mpatches
 import pandas as pd
 from pandas.plotting import table 
 from scipy import stats
-
 
 def main(config) -> None:
     """
@@ -18,10 +16,10 @@ def main(config) -> None:
 
 
     """
-    test_metric_dirs = config["channel_integration_test_metric_dirs"]
-    test_out_metric_dirs = config["channel_integration_test_out_metric_dirs"]
-    model_names = config["channel_integration_model_names"]
-    plot_save_dir = config["channel_integration_plot_save_dir"]
+    test_metric_dirs = config["control_compounds_test_metric_dirs"]
+    test_out_metric_dirs = config["control_compounds_test_out_metric_dirs"]
+    model_names = config["control_compounds_model_names"]
+    plot_save_dir = config["control_compounds_plot_save_dir"]
 
     test_data_to_plot = []
     test_out_data_to_plot = []
@@ -31,12 +29,7 @@ def main(config) -> None:
         with open(metric_dir, 'rb') as handle:
             metrics = pickle.load(handle)
 
-        Nruns = len(metrics)
-
-        acc = np.zeros(Nruns)
-
-        for i in range(Nruns):
-            acc[i] = metrics[i]["accuracy"]
+        acc = np.array(metrics)
 
         # Create a list of these arrays
         test_data_to_plot.append(acc)
@@ -46,12 +39,8 @@ def main(config) -> None:
         with open(metric_dir, 'rb') as handle:
             metrics = pickle.load(handle)
 
-        Nruns = len(metrics)
 
-        acc = np.zeros(Nruns)
-
-        for i in range(Nruns):
-            acc[i] = metrics[i]["accuracy"]
+        acc = np.array(metrics)
 
         # Create a list of these arrays
         test_out_data_to_plot.append(acc)
@@ -84,10 +73,10 @@ def main(config) -> None:
         plt.axvline(x=2*(i)+1.25, color='grey', linestyle='dotted')
     # Set up x-axis labels and title
     plt.xticks(x + 0.25, model_names)  # We add 0.25 to center the labels
-    plt.xlabel('Channel Set')
+    # plt.xlabel('Model')
     plt.ylabel('Accuracy')
     plt.legend(loc=2)
-    plt.savefig(plot_save_dir+'mean_model_comparisons.png',dpi=500, bbox_inches='tight')
+    plt.savefig(plot_save_dir+'control_mean_model_comparisons.png',dpi=500, bbox_inches='tight')
 
 
     Nmodels = len(test_data_to_plot)
@@ -115,7 +104,7 @@ def main(config) -> None:
     plt.xticks(x, model_names)  # We add 0.25 to center the labels
     # plt.xlabel('Model')
     plt.ylabel('Relative Change in Accuracy from IID to OOD')
-    plt.savefig(plot_save_dir+'relative_model_comparisons.png',dpi=500, bbox_inches='tight')
+    plt.savefig(plot_save_dir+'control_relative_model_comparisons.png',dpi=500, bbox_inches='tight')
 
 
 
@@ -123,7 +112,7 @@ def main(config) -> None:
 
     N = len(model_names)
 
-    anchor_model = test_metric_dirs = config["channel_integration_comparison_model_name"]
+    anchor_model = test_metric_dirs = config["comparison_model_name"]
     anchor_index = np.where(np.array(model_names)==anchor_model)[0][0]
 
     for i in range(N):
@@ -152,17 +141,6 @@ def main(config) -> None:
             t_statistic, p_value = stats.ttest_ind(test_out_data_to_plot[anchor_index], test_out_data_to_plot[i])
 
             data_dict[model_names[i]]['OOD p-value'] = np.round(p_value,6)
-
-        anchor_metrics_iid = test_data_to_plot[anchor_index]
-        anchor_metrics_ood = test_out_data_to_plot[anchor_index]   
-
-        mean_change_w_anchor_iid = ((np.mean(test_data_to_plot[i]) - np.mean(anchor_metrics_iid))/np.mean(anchor_metrics_iid))
-
-        mean_change_w_anchor_ood = ((np.mean(test_out_data_to_plot[i]) - np.mean(anchor_metrics_ood))/np.mean(anchor_metrics_ood))
-
-
-        result_dict['IID Change w.r.t anchor'] = str(np.round(mean_change_w_anchor_iid,3)) 
-        result_dict['OOD Change w.r.t anchor'] = str(np.round(mean_change_w_anchor_ood,3)) 
 
 
     plt.style.use('bmh')

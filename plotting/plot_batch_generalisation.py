@@ -4,6 +4,9 @@ import matplotlib.pyplot as plt
 import argparse
 import yaml
 import matplotlib.patches as mpatches
+import pandas as pd
+from pandas.plotting import table 
+from scipy import stats
 
 
 def main(config) -> None:
@@ -113,6 +116,64 @@ def main(config) -> None:
     # plt.xlabel('Model')
     plt.ylabel('Relative Change in Accuracy from IID to OOD')
     plt.savefig(plot_save_dir+'relative_model_comparisons.png',dpi=500, bbox_inches='tight')
+
+
+
+    data_dict = {}
+
+    N = len(model_names)
+
+    anchor_model = test_metric_dirs = config["comparison_model_name"]
+    anchor_index = np.where(np.array(model_names)==anchor_model)[0][0]
+
+    for i in range(N):
+
+        model_metrics = test_data_to_plot[i]
+
+        result_dict = {}
+
+        result_dict['IID Accuracy'] = str(np.round(np.mean(model_metrics),3)) + '±' + str(np.round(np.std(model_metrics),3)) 
+
+        model_out_metrics = test_out_data_to_plot[i]
+        result_dict['OOD Accuracy'] = str(np.round(np.mean(model_out_metrics),3)) + '±' + str(np.round(np.std(model_out_metrics),3)) 
+
+        ratio = (model_out_metrics - model_metrics)/model_metrics
+
+        result_dict['(OOD - IID / OOD) Accuracy'] = str(np.round(np.mean(ratio),3)) + '±' + str(np.round(np.std(ratio),3)) 
+
+        data_dict[model_names[i]] = result_dict
+
+        if i != anchor_index:
+
+            t_statistic, p_value = stats.ttest_ind(test_data_to_plot[anchor_index], test_data_to_plot[i])
+
+            data_dict[model_names[i]]['IID p-value'] = np.round(p_value,3)
+
+            t_statistic, p_value = stats.ttest_ind(test_out_data_to_plot[anchor_index], test_out_data_to_plot[i])
+
+            data_dict[model_names[i]]['OOD p-value'] = np.round(p_value,6)
+
+        anchor_metrics_iid = test_data_to_plot[anchor_index]
+        anchor_metrics_ood = test_out_data_to_plot[anchor_index]   
+
+        mean_change_w_anchor_iid = ((np.mean(test_data_to_plot[i]) - np.mean(anchor_metrics_iid))/np.mean(anchor_metrics_iid))
+
+        mean_change_w_anchor_ood = ((np.mean(test_out_data_to_plot[i]) - np.mean(anchor_metrics_ood))/np.mean(anchor_metrics_ood))
+
+
+        result_dict['IID Change w.r.t anchor'] = str(np.round(mean_change_w_anchor_iid,3)) 
+        result_dict['OOD Change w.r.t anchor'] = str(np.round(mean_change_w_anchor_ood,3)) 
+
+
+    plt.style.use('bmh')
+    df = pd.DataFrame(data_dict).T  # your DataFrame
+
+    fig, ax = plt.subplots(figsize=(12, 2)) # set size frame
+    ax.axis('off')
+
+    tbl = table(ax, df, loc='center', cellLoc='center')
+
+    plt.savefig(plot_save_dir+'control_result_table.png',dpi=500, bbox_inches='tight')
 
 if __name__ == "__main__":
 
