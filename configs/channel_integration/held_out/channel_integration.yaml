@@ -1,0 +1,25 @@
+channel_integration_test_metric_dirs:
+- /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/nucleus/held_out_compound_test_metrics_mae.pkl
+- /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/actin/held_out_compound_test_metrics_mae.pkl
+- /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/mitochondria/held_out_compound_test_metrics_mae.pkl
+- /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/nucleus_mitochondria/held_out_compound_test_metrics_mae.pkl
+- /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/nucleus_actin/held_out_compound_test_metrics_mae.pkl
+- /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/fvit_s3_rope/held_out_compound_test_metrics_mae.pkl
+
+channel_integration_test_out_metric_dirs:
+- /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/nucleus/held_out_compound_test_ood_metrics_mae.pkl
+- /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/actin/held_out_compound_test_ood_metrics_mae.pkl
+- /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/mitochondria/held_out_compound_test_ood_metrics_mae.pkl
+- /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/nucleus_mitochondria/held_out_compound_test_ood_metrics_mae.pkl
+- /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/nucleus_actin/held_out_compound_test_ood_metrics_mae.pkl
+- /hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/fvit_s3_rope/held_out_compound_test_ood_metrics_mae.pkl
+
+channel_integration_model_names: 
+- Nu 
+- Ac
+- M
+- Nu, M
+- Nu, Ac 
+- Nu, M, Ac
+channel_integration_comparison_model_name: Nu, M, Ac
+channel_integration_plot_save_dir: '/hpc/scratch/weka01/cjh86475/channel_agnostic_model/model_evaluation/channel_integration/held_out/'
