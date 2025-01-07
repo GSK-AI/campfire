@@ -46,6 +46,19 @@ model = MaskedAutoencoder(
 ```
 The parameters specified here in the instantiation are the minimum set of of necessary parameters for the instatiation of the `MaskedAutoencoder` class. 
 
+The `MaskedAutoencoder` class expects a dictionary with at least two keys: `inputs` and `inputs_channel_idx`. 
+ - `inputs`: are image tensors with dimensions (batch_size, number_of_channels, image_height, image_width)
+ - `inputs_channel_idx`: are tensors of dimension (batch_size, number_of_channels) that indicates which channel is assigned to each index. 
+
+Example input data can be loaded and fed-forward the masked autoencoder via
+```
+from masked_autoencoder.test_data import TEST_DATA
+
+embeddings = model(TEST_DATA, embed=True)
+```
+
+
+
 
 ### 3. Generating results from manuscript 
 
