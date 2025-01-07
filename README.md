@@ -54,14 +54,25 @@ Example input data can be loaded and fed-forward the masked autoencoder via
 ```
 from masked_autoencoder.test_data import TEST_DATA
 
-embeddings = model(TEST_DATA, embed=True)
+embeddings = model(TEST_DATA, embed=True)['embeddings']
 ```
 
 #### 2.2. Loading Campfire 
 
 To load the pretrained model **Campfire** please run the following:
 
+```
+checkpoint_path  = '/hdd_scratch2/cjh86475/channel_agnostic_model/checkpoints/campfire.pth'
 
+model = MaskedAutoencoder(
+    img_size=112, 
+    patch_size=14, 
+    in_chans = 5,
+    mask_ratio = 0.8,
+)
+
+model.load_state_dict(checkpoint['state_dict'])
+```
 
 
 ### 3. Generating results from manuscript 
