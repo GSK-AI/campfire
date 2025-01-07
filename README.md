@@ -28,12 +28,31 @@ Then one must run `python runners/run_linear_pipeline.py` which will trigger a p
 To evaluate models when dealing with images of cells subject to out-of-distribution compounds, we train a linear layer with single cell embeddings to predict 1-of-60 compounds held-out of model pretraining (as specified in the control csv files generated earlier). Within `runners/run_held_out_pipeline.py` set the config file for the model under evaluation (i.e **Campfire**, DinoViT-S8, etc). After setting config file, run `python runners/run_held_out_pipeline.py` to trigger a pipeline that will take single cell embeddings, sample 30 embeddings from each well in the TARGET2 plates, and train 5 linear layers, using 5 subsets of the training data via cross-fold validation. The output of this will be the performance metrics for the in-distribution test set and out-of-distribution test set, for the model specified by the config file. 
 
 
-### 2. Generating results from manuscript 
+### 2. Access to CAMPFIRE for researchers 
+
+Although we do not provide code for the pretraining of **Campfire**, we provide code for the model architecture, and the model checkpoint for testing and further use. 
+
+#### 2.1. Model Classes 
+**Campfire** is a masked autoencoder. A model of this type can be instantiated with the following
+```
+from masked_autoencoder.model import MaskedAutoencoder
+
+model = MaskedAutoencoder(
+    img_size=112, 
+    patch_size=14, 
+    in_chans = 5,
+    mask_ratio = 0.8,
+)
+```
+The parameters specified here in the instantiation are the minimum set of of necessary parameters for the instatiation of the `MaskedAutoencoder` class. 
+
+
+### 3. Generating results from manuscript 
 
 Here we provide details of which config files and code were used to generate each figure and table within our manuscript.
 
 
-#### 2.1. Results for Table 3.1
+#### 3.1. Results for Table 3.1
 To generate results shown in Table 3.1, use the following:
 ```
 python runners/run_linear_pipeline.py 
@@ -51,7 +70,7 @@ with the config file set to
 2. `configs/models/held_out/dino_vitl14.yaml`
 3. `configs/models/held_out/campfire.yaml`  
 
-#### 2.2. Results for Figure 3.1
+#### 3.2. Results for Figure 3.1
 To generate results shown in Figure 3.1, use the following:
 ```
 python runners/run_linear_pipeline.py 
@@ -80,7 +99,7 @@ with CONFIG set to
 1. `configs/channel_integration/channel_integration.yaml` 
 2. `configs/channel_integration/held_out/channel_integration.yaml`.
 
-#### 2.3. Results for Table 3.2
+#### 3.3. Results for Table 3.2
 To generate results shown in Table 3.2, use the following:
 ```
 python runners/run_linear_pipeline.py 
@@ -98,7 +117,7 @@ with the config file set to
 2. `configs/batch_generalisation/held_out/5_plates.yaml` 
 3. `configs/batch_generalisation/held_out/10_plates.yaml` 
 
-#### 2.4. Results for Table 3.3
+#### 3.4. Results for Table 3.3
 To generate results shown in Table 3.3, use the following:
 ```
 python runners/run_linear_pipeline.py 
@@ -114,7 +133,7 @@ with the config file set to
 1. `configs/unseen_channel/held_out/fvit_s3.yaml` 
 2. `configs/unseen_channel/held_out/dino_vits8.yaml`.
 
-#### 2.5. Results for Figure 3.2
+#### 3.5. Results for Figure 3.2
 To generate results shown in Figure 3.2, use the following:
 ```
 python modelling/macrophage_embeddings.py -c $CONFIG
@@ -123,7 +142,7 @@ with $CONFIG set to
 1. `configs/finetuning/config_fvit_head.yaml` 
 2. `configs/finetuning/config_dino_head.yaml`.
 
-#### 2.6. Results for Figure 3.3
+#### 3.6. Results for Figure 3.3
 To generate results shown in Figure 3.3, use the following:
 ```
 python modelling/macrophage_zprime.py -c $CONFIG
