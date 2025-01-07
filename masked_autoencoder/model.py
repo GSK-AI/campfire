@@ -1,30 +1,17 @@
 import logging
-import math
-import types
-from copy import deepcopy
 from functools import partial
-from typing import Dict, Literal, Optional, Union
+from typing import Dict, Literal, Optional
 
 import torch
 import torch.nn as nn
-from gsk_configlib import instantiate_object
 from timm.models.vision_transformer import Block
 
-from aiml_cell_imaging.models.aggregation import get_aggregation_layer
-from aiml_cell_imaging.models.modules import (
+from channel_agnostic_vit.masked_autoencoder.modules import (
     ContextPatchEmbed,
-    FlipPatchEmbed,
     RandomPatchDropout,
     RoPEBlock,
 )
-from aiml_cell_imaging.models.pos_embed import build_2d_sinusoidal_pos_embed
-from aiml_cell_imaging.models.pretrained import (
-    FOUNDATION_MODELS,
-    freeze_parameters,
-    get_imagenet_feature_extractor,
-    get_named_model,
-    map_channels_to_rbg,
-)
+from channel_agnostic_vit.masked_autoencoder.position_embedding import build_2d_sinusoidal_pos_embed
 
 
 
@@ -99,7 +86,6 @@ class MaskedEncoder(nn.Module):
         mask_ratio: float,
         sync_mask: bool = True,
         expects_dict: bool = True,
-        pretrained: bool = True,
         num_classes: Optional[int] = None,
         global_pool: Literal["avg", "token"] = "avg",
         embed_dim: int = 1024,
@@ -200,77 +186,6 @@ class MaskedEncoder(nn.Module):
 
         # customized weights initialization required by MAE
         self.initialize_weights()
-
-        # load weights from pretrained models over ImageNet-1k
-        if pretrained:
-            lookup_parameters = (embed_dim, depth, num_heads)
-            pretrained_model_exists = True
-
-            if lookup_parameters == (768, 12, 12):
-                if patch_size != 16:
-                    logging.warning(
-                        f"""Patch size {patch_size} does not match loaded checkpoint's
-                        patch size 16. Pretrained weights should be finetuned to account
-                        for this discrepancy"""
-                    )
-                pretrained_model_name = "vit_base_patch16_224.mae"
-            elif lookup_parameters == (1024, 24, 16):
-                if patch_size != 16:
-                    logging.warning(
-                        f"""Patch size {patch_size} does not match loaded checkpoint's
-                        patch size 16. Pretrained weights should be finetuned to account
-                        for this discrepancy"""
-                    )
-                pretrained_model_name = "vit_large_patch16_224.mae"
-            elif lookup_parameters == (1280, 32, 16):
-                if patch_size != 14:
-                    logging.warning(
-                        f"""Patch size {patch_size} does not match loaded checkpoint's
-                        patch size 14. Pretrained weights should be finetuned to account
-                        for this discrepancy"""
-                    )
-                pretrained_model_name = "vit_huge_patch14_224.mae"
-            else:
-                logging.warning(
-                    f"""Current model setting {lookup_parameters} does not match any
-                    available pretrained checkpoints in HuggingFace. So pretrained
-                    weights are not loaded and randomly initialized weights are used"""
-                )
-                pretrained_model_exists = False
-
-            if pretrained_model_exists:
-                self.load_pretrained_weights(pretrained_model_name)
-
-    def load_pretrained_weights(self, pretrained_model_name: str):
-        """Load weights from pretrained models
-
-        In pretrained models, their positional embeddings are fixed sinusoidal
-        embeddings. (1) These pretrained embeddings may not align correctly with
-        the patch tokens generated with a different patch size. (2) They cannot
-        provide learnable or other types of positional embeddings. Thus the
-        positional embeddings of pretrained models are not loaded.
-
-        Moreover, pretrained patch embeddings only apply to fixed RGB channels while
-        our patch embedding layers use a new channel-agnostic method with 3D Conv layer
-        and context embedding layer. So the old patch embeddings weights have
-        incompatible shape and should be dropped.
-
-        Therefore, we only load the weights of attention blocks and normalization layers
-        that are independent of the patch size and image size.
-        """
-        pretrained_model = get_named_model(pretrained_model_name, pretrained=True)
-        pretrained_state_dict = pretrained_model.state_dict()
-
-        ignored_parameters = [
-            "pos_embed",
-            "patch_embed.proj.weight",
-            "patch_embed.proj.bias",
-        ]
-        for k in ignored_parameters:
-            del pretrained_state_dict[k]
-
-        # only the matching attention blocks and normalization layers will be updated
-        self.load_state_dict(pretrained_state_dict, strict=False)
 
     def initialize_weights(self):
         """Initialize weights and special tokens using trunc_normal"""
