@@ -1,4 +1,4 @@
-# CAMPFIRE: Downstream evaluations of channel agnostic vision transformer
+# CAMPFIRE: Downstream evaluations of channel agnostic vision transformers
 Repository for code used to run experiments in "Out-of-distribution evaluations of channel agnostic masked autoencoders in fluorescence microscopy"
 
 ### 1. How to use code to pretrain, and evaluate channel agnostic model 
@@ -48,7 +48,7 @@ The parameters specified here in the instantiation are the minimum set of of nec
 
 The `MaskedAutoencoder` class expects a dictionary with at least two keys: `inputs` and `inputs_channel_idx`. 
  - `inputs`: are image tensors with dimensions (batch_size, number_of_channels, image_height, image_width)
- - `inputs_channel_idx`: are tensors of dimension (batch_size, number_of_channels) that indicates which channel is assigned to each index. 
+ - `inputs_channel_idx`: are tensors of dimension (batch_size, number_of_channels) that indicates which channel is assigned to each index. In a dataset, there may be many 3-channel images, but those 3 channels differ in type between the images. `inputs_channel_idx` at element (0,0) will be an integer in range [0,num_channels-1] indicating that the first channel in the first sample in the batch is from the channel corresponding to that integer. 
 
 Example input data can be loaded and fed-forward the masked autoencoder via
 ```
@@ -56,6 +56,10 @@ from masked_autoencoder.test_data import TEST_DATA
 
 embeddings = model(TEST_DATA, embed=True)
 ```
+
+#### 2.2. Loading Campfire 
+
+To load the pretrained model **Campfire** please run the following:
 
 
 
