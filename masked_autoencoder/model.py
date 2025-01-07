@@ -6,14 +6,12 @@ import torch
 import torch.nn as nn
 from timm.models.vision_transformer import Block
 
-from channel_agnostic_vit.masked_autoencoder.modules import (
+from masked_autoencoder.modules import (
     ContextPatchEmbed,
     RandomPatchDropout,
     RoPEBlock,
 )
-from channel_agnostic_vit.masked_autoencoder.position_embedding import build_2d_sinusoidal_pos_embed
-
-
+from masked_autoencoder.position_embedding import build_2d_sinusoidal_pos_embed
 
 class MaskedEncoder(nn.Module):
     """

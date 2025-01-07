@@ -1,4 +1,3 @@
-
 from typing import Literal, Optional
 
 import numpy as np
@@ -9,7 +8,7 @@ from timm.layers import Mlp
 from timm.models.vision_transformer import Attention, Block
 from torch import nn
 
-from aiml_cell_imaging.models.pos_embed import (
+from masked_autoencoder.position_embedding import (
     apply_rotary_emb,
     compute_axial_cis,
     compute_mixed_cis,
