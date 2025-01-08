@@ -1,4 +1,4 @@
-# CAMPFIRE: **C**hannel **a**gnostic **m**orphological **p**rofiling **f**rom **i**maging under a **r**ange of **e**xperimental settings
+# Campfire: *C*hannel *a*gnostic *m*orphological *p*rofiling *f*rom *i*maging under a *r*ange of *e*xperimental settings
 Accompanying code for **Out-of-distribution evaluations of channel agnostic masked autoencoders in fluorescence microscopy**
 
 ## Instructions
