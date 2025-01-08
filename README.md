@@ -1,5 +1,19 @@
-# CAMPFIRE: Downstream evaluations of channel agnostic vision transformers
-Repository for code used to run experiments in "Out-of-distribution evaluations of channel agnostic masked autoencoders in fluorescence microscopy"
+# CAMPFIRE: **C**hannel **a**gnostic **m**orphological **p**rofiling **f**rom **i**maging under a **r**ange of **e**xperimental settings
+Accompanying code for **Out-of-distribution evaluations of channel agnostic masked autoencoders in fluorescence microscopy**
+
+## Instructions
+#### Cloning and setting up your environment
+```bash
+git clone https://github.com/GSK-AI/campfire
+cd campfire
+conda env create --name campfire --file env.yaml
+source activate campfire
+source .env
+pip install -e .
+```
+#### Downloading checkpoints and data
+
+## Use
 
 ### 1. How to use code to pretrain, and evaluate channel agnostic model 
 
