@@ -21,7 +21,7 @@ Although we do not provide code for the pretraining of **Campfire**, we provide 
 
 #### 1.1. Model Classes 
 **Campfire** is a masked autoencoder. A model of this type can be instantiated with the following
-```
+```python
 from masked_autoencoder.model import MaskedAutoencoder
 
 model = MaskedAutoencoder(
@@ -48,8 +48,10 @@ embeddings = model(TEST_DATA, embed=True)['embeddings']
 
 To load the pretrained model **Campfire** please run the following:
 
-```
-checkpoint_path  = '/hdd_scratch2/cjh86475/channel_agnostic_model/checkpoints/campfire.pth'
+```python
+checkpoint_path  = $CHECKPOINT_PATH_TO_BE_ADDED
+
+checkpoint = torch.load(checkpoint_path)
 
 model = MaskedAutoencoder(
     img_size=112, 
@@ -83,12 +85,12 @@ The downstream evaluations specified in the next sections assume that a model is
 
 
 #### 2.3. Given a set of embeddings, run linear probing, predicting 1-of-9 controls 
-In our manuscript, we evaluate models for fluorscence microscopy by training a linear layer with single cell embeddings to predict 1-of-9 control compounds. To evaluate a new model, pretrained on some dataset or perhaps a subset of the JUMP-CP dataset not included in our evaluation splits, one can alter the config file in `runners/run_linear_pipeline.py` such that the directory to the control csv file and the csv file containing the single cell embeddings for the TARGET2 plates in source 3 are provided. 
+In our manuscript, we evaluate models for fluorscence microscopy by training a linear layer with single cell embeddings to predict 1-of-9 control compounds. To evaluate a new model, pretrained on some dataset or perhaps a subset of the JUMP-CP dataset not included in our evaluation splits, one can alter the config file `example_configs/controls_task_config.yaml` such that the directory to the control csv file and the csv file containing the single cell embeddings for the TARGET2 plates in source 3 are provided. 
 
 Then one must run `python runners/run_linear_pipeline.py` which will trigger a pipleline that samples single cell embeddings from each well of TARGET2 plates, assigns them to data splits, and then trains several linear layers using different subsets of the training set. The output folder will contain the performance metrics for the in-distribution test set and out-of-distribution test set, for the model specified by the config file. 
 
 #### 2.4. Given a set of embeddings, run linear probing, predicting 1-of-60 held-out compounds  
-To evaluate models when dealing with images of cells subject to out-of-distribution compounds, we train a linear layer with single cell embeddings to predict 1-of-60 compounds held-out of model pretraining (as specified in the control csv files generated earlier). Within `runners/run_held_out_pipeline.py` set the config file for the model under evaluation (i.e **Campfire**, DinoViT-S8, etc). After setting config file, run `python runners/run_held_out_pipeline.py` to trigger a pipeline that will take single cell embeddings, sample 30 embeddings from each well in the TARGET2 plates, and train 5 linear layers, using 5 subsets of the training data via cross-fold validation. The output of this will be the performance metrics for the in-distribution test set and out-of-distribution test set, for the model specified by the config file. 
+To evaluate models when dealing with images of cells subject to out-of-distribution compounds, we train a linear layer with single cell embeddings to predict 1-of-60 compounds held-out of model pretraining (as specified in the control csv files generated earlier). First adapt the config file `example_configs/held_out_compound_task_config.yaml` to include paths to control csv and model embedding csv files. After setting config file, run `python runners/run_held_out_pipeline.py` to trigger a pipeline that will take single cell embeddings, sample 30 embeddings from each well in the TARGET2 plates, and train 5 linear layers, using 5 subsets of the training data via cross-fold validation. The output of this will be the performance metrics for the in-distribution test set and out-of-distribution test set, for the model specified by the config file. 
 
 
 ### 3. Generating results from manuscript 
