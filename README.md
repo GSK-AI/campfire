@@ -13,6 +13,12 @@ pip install -e .
 ```
 #### Downloading checkpoints and data
 
+#### Run tests 
+```bash 
+cd campfire
+source activate campfire
+python run_tests.py 
+```
 ## Use
 
 ### 1. Access to CAMPFIRE for researchers 
