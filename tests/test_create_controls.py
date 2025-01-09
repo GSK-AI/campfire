@@ -1,7 +1,7 @@
 import unittest
 import pandas as pd
 import numpy as np
-from create_controls import set_split, get_held_out_compounds, split_target_plates, split_compound_plates
+from controls.create_controls import set_split, get_held_out_compounds, split_target_plates, split_compound_plates
 
 class TestCreateControls(unittest.TestCase):
 
