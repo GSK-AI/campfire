@@ -137,7 +137,7 @@ def run_linear_probe(seed,log_dir,num_epochs,patience,embed_dim,num_classes,dl_t
     
     # training
     early_stop_callback = EarlyStopping(monitor="val_accuracy", min_delta=0.00, patience=patience, verbose=False, mode="max")
-    trainer = pl.Trainer(gpus=1, max_epochs=num_epochs,default_root_dir=log_dir,
+    trainer = pl.Trainer(max_epochs=num_epochs,default_root_dir=log_dir,
         enable_model_summary=False,callbacks=[early_stop_callback],logger=False)
 
     trainer.fit(model,dl_train,dl_test)
