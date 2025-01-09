@@ -14,6 +14,7 @@ pip install -e .
 #### Downloading checkpoints and data
 
 #### Run tests 
+To run unit tests, run the following with access to a GPU node: 
 ```bash 
 cd campfire
 source activate campfire
