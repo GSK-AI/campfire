@@ -12,7 +12,7 @@ source .env
 pip install -e .
 ```
 #### Downloading checkpoints and data
-Information on checkpoint download to be added. 
+Instructions to download model checkpoint are to be added.  
 
 #### Run tests 
 To run unit tests, run the following with access to a GPU node: 
@@ -70,8 +70,6 @@ model = MaskedAutoencoder(
 
 model.load_state_dict(checkpoint['state_dict'])
 ```
-
-
 
 
 ### 2. How to use code to pretrain, and evaluate channel agnostic model 
