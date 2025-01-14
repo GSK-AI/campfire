@@ -1,0 +1,20 @@
+seed: 10 # random seed
+plate_dir: /your/path/to/jump/plate.csv # path to plate csv file
+well_dir: /your/path/to/jump/well.csv # path to well csv file
+compound_dir: /your/path/to/jump/compound.csv # path to compound csv file
+control_csv_path: #path to save control csv files
+num_compounds_held_out: 60
+frac_compound_wells_in_train: 0.6
+hold_out_target_plates: ['JCPQC051','JCPQC052','JCPQC053','JCPQC054','JCPQC034'] # list of plates to hold out
+# list of JUMP_CP compound ids for the control compounds
+control_list: [
+    'JCP2022_033924',
+    'JCP2022_085227',
+    'JCP2022_037716',
+    'JCP2022_025848',
+    'JCP2022_046054',
+    'JCP2022_035095',
+    'JCP2022_064022',
+    'JCP2022_050797',
+    'JCP2022_012818'
+]
