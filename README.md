@@ -81,7 +81,7 @@ To generate the results of the experiments in our manuscript, we provide the cod
 
 To train and evaluate a model using the same criteria as in our manuscript, it is necessary to assign the wells of the TARGET2 and COMPOUND plates of Source 3 of the JUMP-CP datasets to various training and evaluation splits. In order to do so, run the following command  
 ```
-python create_controls.py -c controls_config.yaml
+python create_controls.py -c example_configs/controls_config.yaml
 ```
 This will generate a .csv file for each of the TARGET2 and COMPOUND plates in Source 3. These .csv files are plate maps, such that each cell will describe the position on the 384-well plate, the compound with which it was stimulated, and the split to which it has been assigned. Using the provided config will generate the same set of data splits used to train **Campfire**. 
 

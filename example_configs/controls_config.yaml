@@ -1,5 +1,6 @@
 seed: 10 # random seed
-plate_dir: /your/path/to/jump/plate.csv # path to plate csv file
+#Download plate.csv, well.csv, compound.csv from JUMP at https://github.com/jump-cellpainting/datasets/tree/main/metadata
+plate_dir: /your/path/to/jump/plate.csv # path to plate csv file 
 well_dir: /your/path/to/jump/well.csv # path to well csv file
 compound_dir: /your/path/to/jump/compound.csv # path to compound csv file
 control_csv_path: #path to save control csv files
