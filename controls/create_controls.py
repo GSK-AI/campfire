@@ -30,10 +30,10 @@ def get_held_out_compounds(compound_list,control_list,N_held_out,):
 
     return held_out_compounds
 
-def split_target_plates(wells,control_list,N_held_out,hold_out_target_plates,seed):
+def split_target_plates(wells,control_list,N_held_out,hold_out_target_plates,seed,expected_num_compounds=302,Ntrain=14,Nval=2):
 
     Ncompounds = np.unique(wells["Metadata_JCP2022"].values).shape[0]
-    assert Ncompounds == 302, "Unexpected number of compounds in TARGET2 plates"
+    assert Ncompounds == expected_num_compounds, "Unexpected number of compounds in TARGET2 plates"
 
     target_compound_ids = wells["Metadata_JCP2022"].values
     compound_list = np.unique(target_compound_ids)
@@ -72,8 +72,8 @@ def split_target_plates(wells,control_list,N_held_out,hold_out_target_plates,see
             Nplates = len(list_of_plates)
 
             #Number of plates we assign to each split
-            Ntrain = 14
-            Nval = 2
+            # Ntrain = 14
+            # Nval = 2
             Ntest = Nplates - Ntrain - Nval
 
             #Get indices correpsonding to plates in train/val/test
@@ -128,10 +128,10 @@ def add_prefix(cell,string):
     
     return string + str(cell)
 
-def split_compound_plates(wells,held_out_compounds,frac_compound_wells_in_train):
+def split_compound_plates(wells,held_out_compounds,frac_compound_wells_in_train,exp_num_compounds=58457):
 
     Ncompounds = np.unique(wells["Metadata_JCP2022"].values).shape[0]
-    assert Ncompounds == 58457, "Unexpected number of compounds in Compound plates,{}".format(Ncompounds)
+    assert Ncompounds == exp_num_compounds, "Unexpected number of compounds in Compound plates,{}".format(Ncompounds)
 
     compound_plate_compound_ids = wells["Metadata_JCP2022"].values
     compound_list = np.unique(compound_plate_compound_ids)

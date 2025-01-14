@@ -7,4 +7,4 @@ scripts_in_order = [
 ]
 
 for script in scripts_in_order:
-    subprocess.check_call(['python', script, '-c', 'configs/unseen_channel/held_out/dino_vits8.yaml'])
+    subprocess.check_call(['python', script, '-c', 'example_configs/held_out_compound_task_config.yaml'])
