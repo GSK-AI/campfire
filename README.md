@@ -12,6 +12,7 @@ source .env
 pip install -e .
 ```
 #### Downloading checkpoints and data
+Information on checkpoint download to be added. 
 
 #### Run tests 
 To run unit tests, run the following with access to a GPU node: 
@@ -100,6 +101,13 @@ Then one must run `python runners/run_linear_pipeline.py` which will trigger a p
 To evaluate models when dealing with images of cells subject to out-of-distribution compounds, we train a linear layer with single cell embeddings to predict 1-of-60 compounds held-out of model pretraining (as specified in the control csv files generated earlier). First adapt the config file `example_configs/held_out_compound_task_config.yaml` to include paths to control csv and model embedding csv files. After setting config file, run `python runners/run_held_out_pipeline.py` to trigger a pipeline that will take single cell embeddings, sample 30 embeddings from each well in the TARGET2 plates, and train 5 linear layers, using 5 subsets of the training data via cross-fold validation. The output of this will be the performance metrics for the in-distribution test set and out-of-distribution test set, for the model specified by the config file. 
 
 #### 2.5. Given a set of embeddings, plot top-2 principal components 
-
+In our manuscript, we finetune campfire on a macrophage dataset, and analyse the principal components of the model embeddings. To produce similar plots, update the config `example_configs/finetuning_configs.yaml` with paths to the relevant files described within, containing model embeddings and targets, and run the following: 
+```
+python modelling/well_embedding_pca.py -c example_configs/finetuning_configs.yaml
+```
 
 #### 2.6. Given a set of embeddings, compute and plot Z' scores for embeddings from different targets 
+In our manuscript, we finetune campfire on a macrophage dataset, and compute the z-prime score for each pair of targets, demonstrating the extent to which embeddings from each target are distinct. To produce similar plots, update the config `example_configs/finetuning_configs.yaml` with paths to the relevant files described within, containing model embeddings and targets, and run the following: 
+```
+python modelling/embedding_zprime_score.py -c example_configs/finetuning_configs.yaml
+```
