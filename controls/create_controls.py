@@ -229,7 +229,7 @@ def main(config) -> None:
 
     num_compounds_held_out = config['num_compounds_held_out']
 
-    #We currently have data for source 3, so in this notebook we create controls for source 3 plates only 
+    #We create controls for source 3 plates only 
     source_plates = plates.loc[plates["Metadata_Source"]=="source_3"]
 
 
