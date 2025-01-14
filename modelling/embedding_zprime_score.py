@@ -7,8 +7,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.metrics import silhouette_score
-from aiml_phenometrics import scalar_projection
-from aiml_phenometrics.zprime import robust_zprime 
+from utils.projection import scalar_projection
+from utils.zprime import robust_zprime 
 
 def compute_principle_components(df: pd.DataFrame, embedding_layer_name: str) -> pd.DataFrame:
     """
