@@ -12,7 +12,7 @@ source .env
 pip install -e .
 ```
 #### Downloading checkpoints and data
-Model checkpoint for **Campfire** can be found at `$PATH_TO_BE_ADDED`
+Model checkpoint for **Campfire** can be found within the latest release. 
 
 #### Run tests 
 To run unit tests, run the following with access to a GPU node: 
@@ -57,7 +57,7 @@ embeddings = model(TEST_DATA, embed=True)['embeddings']
 To load the pretrained model **Campfire** please run the following:
 
 ```python
-checkpoint_path  = $PATH_TO_BE_ADDED
+checkpoint_path  = /path/to/local/copy/of/checkpoint
 
 checkpoint = torch.load(checkpoint_path)
 
