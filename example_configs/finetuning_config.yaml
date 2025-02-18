@@ -1,0 +1,49 @@
+paths_to_plates: 
+- /path/to/embeddings/embeddings_for_plates_1_2.csv
+- /path/to/embeddings/embeddings_for_plates_3_4.csv
+paths_to_controls: 
+ - /path/to/controls/plate1.csv
+ - /path/to/controls/plate2.csv
+ - /path/to/controls/plate3.csv
+ - /path/to/controls/plate4.csv
+plate_barcodes:
+ - PLATE_1
+ - PLATE_2
+ - PLATE_3
+ - PLATE_4
+id_barcodes: 
+ - PLATE_1
+ - PLATE_2
+m2_barcodes: 
+ - PLATE_1
+ - PLATE_3
+save_path: /path/to/save
+last_layer: last_layer
+plot_compounds: 
+ - compound_1
+ - compound_2
+vmin: 0.7
+vmax: 1.0
+controls: [
+    ["compound_1", "compound_2"],
+    ["compound_1", "compound_3"],
+    ["compound_1", "compound_4"],
+    ["compound_2", "compound_1"],
+    ["compound_2", "compound_3"],
+    ["compound_2", "compound_4"],
+    ["compound_3", "compound_1"],
+    ["compound_3", "compound_2"],
+    ["compound_3", "compound_4"],
+    ["compound_4", "compound_1"],
+    ["compound_4", "compound_2"],
+    ["compound_4", "compound_3"],
+]
+zprime_compounds: [
+    "compound_1",
+    "compound_2",
+    "compound_3",
+    "compound_4",
+]
+m2_plates:
+ - PLATE_1
+ - PLATE_3
